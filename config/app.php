@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'The Code Cove'),
 
     /*
     |--------------------------------------------------------------------------
@@ -228,5 +228,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    'developers' => [
+        [
+            'name' => 'Brayon',
+            'email' => 'braydonalan@gmail.com',
+        ]
+    ]
 
 ];
