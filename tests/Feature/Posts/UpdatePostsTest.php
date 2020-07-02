@@ -6,10 +6,11 @@ use App\Models\Post;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 use Tests\Utility;
 
-class EditPostsTest extends TestCase
+class UpdatePostsTest extends TestCase
 {
     use WithFaker;
     use DatabaseTransactions;
@@ -27,17 +28,23 @@ class EditPostsTest extends TestCase
     public function it_does_not_allow_non_auth_users()
     {
         $post = Post::all()->random();
-        $this->get(route('posts.edit', $post->id))
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $this->putJson(route('api.posts.update', $post->id), [
+            'name' => $this->faker->name,
+            'content' => $this->faker->text,
+        ])->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     /** @test */
-    public function it_does_allow_auth_users()
+    public function it_does_allow_auth_user()
     {
+        Sanctum::actingAs(
+            $this->utility->user,
+            ['*']
+        );
         $post = Post::all()->random();
-        $this->actingAs($this->utility->user)
-            ->get(route('posts.edit', $post->id))
-            ->assertOk()
-            ->assertViewIs('posts.edit');
+        $this->putJson(route('api.posts.update', $post->id), [
+            'name' => $this->faker->name,
+            'content' => $this->faker->text,
+        ])->assertOk();
     }
 }

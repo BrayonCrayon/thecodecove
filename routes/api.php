@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('api.')->group(function() {
 
+    Route::post('login', 'Auth\AuthController@login')->name('login');
+
     /*
      *********************************************************
      *** Public Access Routes
      *********************************************************
      */
     Route::get('posts', 'Blog\FetchAllPostsController')->name('posts');
+    Route::get('posts/{post}', 'Blog\ViewPostsController')->name('posts.view');
 
 
 
@@ -30,8 +34,9 @@ Route::name('api.')->group(function() {
      *** Authenticated Access Routes
      *********************************************************
      */
-    Route::middleware('auth:api')->group(function() {
-
+    Route::middleware('auth:sanctum')->group(function() {
+        Route::post('posts/store', 'Blog\CreatePostsController')->name('posts.store');
+        Route::put('posts/update/{post}', 'Blog\UpdatePostsController')->name('posts.update');
     });
 });
 

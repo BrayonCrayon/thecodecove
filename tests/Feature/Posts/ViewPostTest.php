@@ -27,7 +27,7 @@ class ViewPostTest extends TestCase
     {
         $post = Post::all()->random();
         $this->actingAs($this->utility->user)
-            ->getJson(`api/posts/{$post->id}`)
+            ->getJson(route('api.posts.view', $post->id))
             ->assertOk()
             ->assertJsonStructure([
                 'name',
@@ -41,7 +41,7 @@ class ViewPostTest extends TestCase
     public function it_allows_non_users_to_access_post()
     {
         $post = Post::all()->random();
-        $this->getJson(`api/posts/{$post->id}`)
+        $this->getJson(route('api.posts.view', $post->id))
             ->assertOk()
             ->assertJsonStructure([
                 'name',
