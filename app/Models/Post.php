@@ -13,6 +13,9 @@ class Post extends Model
         'user_id',
         'created_at',
     ];
+    protected $with = [
+        'user',
+    ];
 
     /*
      *********************************************************

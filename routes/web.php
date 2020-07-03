@@ -13,13 +13,3 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Auth::Routes();
-//Route::middleware('auth')->group(function() {
-//    Route::get('/home', 'HomeController@index')->name('home');
-//    Route::get('posts/create', 'Blog\CreatePostsController')->name('posts.create');
-//});
-
-//Route::get('/', 'PublicPages\WelcomeController')->name('welcome');
-//Route::resource('posts', 'Blog\PostsController')->only(['index', 'show', 'edit', 'create']);
-//Route::get('posts', 'Blog\ViewPostsController')->name('posts.index');
-//Route::get('posts/{post}', 'Blog\ShowPostsController')->name('posts.show');

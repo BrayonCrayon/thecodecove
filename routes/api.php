@@ -1,7 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('api.')->group(function() {
 
+    /*
+    *********************************************************
+    *** Public Auth Routes
+    *********************************************************
+    */
     Route::post('login', 'Auth\AuthController@login')->name('login');
 
     /*
@@ -27,19 +29,25 @@ Route::name('api.')->group(function() {
     Route::get('posts', 'Blog\FetchAllPostsController')->name('posts');
     Route::get('posts/{post}', 'Blog\ViewPostsController')->name('posts.view');
 
-
-
     /*
      *********************************************************
      *** Authenticated Access Routes
      *********************************************************
      */
     Route::middleware('auth:sanctum')->group(function() {
+        /*
+         *********************************************************
+         *** Post Routes
+         *********************************************************
+         */
         Route::post('posts/store', 'Blog\CreatePostsController')->name('posts.store');
         Route::put('posts/update/{post}', 'Blog\UpdatePostsController')->name('posts.update');
+
+        /*
+         *********************************************************
+         *** Auth User Routes
+         *********************************************************
+         */
+        Route::get('auth/user', 'Auth\AuthUserController')->name('auth.user');
     });
 });
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
