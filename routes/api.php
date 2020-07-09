@@ -19,7 +19,6 @@ Route::name('api.')->group(function() {
     *** Public Auth Routes
     *********************************************************
     */
-    Route::post('login', 'Auth\AuthController@login')->name('login');
 
     /*
      *********************************************************
