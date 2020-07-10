@@ -3,6 +3,7 @@
 namespace Tests\Feature\Posts;
 
 use App\Models\Post;
+use App\Models\Status;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
@@ -31,6 +32,7 @@ class UpdatePostsTest extends TestCase
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $this->faker->name,
             'content' => $this->faker->text,
+            'status_id' => $this->faker->randomElement([Status::DRAFT, Status::PUBLISHED]),
         ])->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
@@ -42,9 +44,11 @@ class UpdatePostsTest extends TestCase
             ['*']
         );
         $post = Post::all()->random();
+        $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $this->faker->name,
             'content' => $this->faker->text,
+            'status_id' => $status,
         ])->assertOk();
     }
 }

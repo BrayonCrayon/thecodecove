@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Posts;
 
+use App\Models\Status;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
@@ -54,11 +55,15 @@ class CreatePostsTest extends TestCase
                 'name',
                 'content',
                 'user_id',
+                'status_id',
+                'published_at',
                 'created_at',
             ])
             ->assertJson([
                 'name' => $name,
                 'content' => $content,
+                'status_id' => Status::DRAFT,
+                'published_at' => null,
                 'user_id' => $this->utility->user->id,
             ]);
     }

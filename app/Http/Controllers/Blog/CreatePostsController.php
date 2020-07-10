@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class CreatePostsController extends Controller
@@ -25,6 +26,8 @@ class CreatePostsController extends Controller
         $post = Post::create([
             'name' => $request->get('name'),
             'content' => $request->get('content'),
+            'status_id' => Status::DRAFT,
+            'published_at' => null,
             'user_id' => $request->get('userId')
         ]);
 

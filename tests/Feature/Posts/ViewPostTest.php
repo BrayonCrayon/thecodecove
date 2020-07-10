@@ -33,6 +33,8 @@ class ViewPostTest extends TestCase
                 'name',
                 'content',
                 'user_id',
+                'status_id',
+                'published_at',
                 'created_at',
             ]);
     }
@@ -47,6 +49,8 @@ class ViewPostTest extends TestCase
                 'name',
                 'content',
                 'user_id',
+                'status_id',
+                'published_at',
                 'created_at',
             ]);
     }

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Posts;
 
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -99,6 +100,8 @@ class CreatePostsTest extends TestCase
             'name' => $data->name,
             'content' => $data->content,
             'user_id' => $data->user_id,
+            'status_id' => Status::DRAFT,
+            'published_at' => null,
             'created_at' => $data->created_at,
         ]);
     }

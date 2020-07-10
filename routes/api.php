@@ -27,6 +27,7 @@ Route::name('api.')->group(function() {
      */
     Route::get('posts', 'Blog\FetchAllPostsController')->name('posts');
     Route::get('posts/{post}', 'Blog\ViewPostsController')->name('posts.view');
+    Route::get('statuses', 'Statuses\FetchStatusesController')->name('statuses');
 
     /*
      *********************************************************
@@ -40,7 +41,9 @@ Route::name('api.')->group(function() {
          *********************************************************
          */
         Route::post('posts/store', 'Blog\CreatePostsController')->name('posts.store');
+        Route::delete('posts/{post}', 'Blog\DeletePostsController')->name('posts.delete');
         Route::put('posts/update/{post}', 'Blog\UpdatePostsController')->name('posts.update');
+        Route::get('posts-drafted/', 'Blog\FetchDraftedPostsController')->name('posts.drafted');
 
         /*
          *********************************************************
