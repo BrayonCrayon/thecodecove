@@ -22,9 +22,30 @@ class Post extends Model
      *** Relationships
      *********************************************************
      */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user() {
         return $this->belongsTo(User::class);
     }
 
+
+
+    /*
+     *********************************************************
+     *** Scope Queries
+     *********************************************************
+     */
+
+    /**
+     * @param $query
+     * @param string $order
+     * @return mixed
+     */
+    public function scopeSortByCreatedAt($query, $order = 'desc')
+    {
+        return $query->orderBy('created_at', $order);
+    }
 
 }

@@ -17,7 +17,7 @@ class FetchAllPostsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $posts = Post::all();
+        $posts = Post::sortByCreatedAt()->get();
         return response()->json($posts);
     }
 }
