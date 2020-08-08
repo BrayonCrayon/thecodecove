@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Posts;
 
+use App\Models\Post;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 use Tests\Utility;
 
-class LogoutTest extends TestCase
+class DeletePostsTest extends TestCase
 {
     use WithFaker;
     use DatabaseTransactions;
@@ -25,21 +25,25 @@ class LogoutTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_allow_non_logged_in_users()
+    public function it_does_not_allow_non_auth_users_to_delete_post()
     {
-        $this->postJson(route('logout'))
-            ->assertStatus(Response::HTTP_NO_CONTENT);
+        $post = Post::all()->random();
+        $this->deleteJson(route('api.posts.delete', $post->id))
+            ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     /** @test */
-    public function it_does_allow_auth_user_to_logout()
+    public function it_does_allow_auth_users_to_delete_post()
     {
+
         Sanctum::actingAs(
             $this->utility->user,
             ['*']
         );
 
-        $this->postJson(route('logout'))
-            ->assertStatus(Response::HTTP_NO_CONTENT);
+        $post = Post::all()->random();
+
+        $this->deleteJson(route('api.posts.delete', $post->id))
+            ->assertOK();
     }
 }

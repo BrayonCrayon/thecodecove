@@ -3,6 +3,7 @@
 namespace Tests\Unit\Posts;
 
 use App\Models\Post;
+use App\Models\Status;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
@@ -36,27 +37,39 @@ class UpdatePostsTest extends TestCase
         $post = Post::all()->random()->first();
         $name = $this->faker->name . self::ALTERED_STRING;
         $content = $this->faker->text . self::ALTERED_STRING;
+        $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
 
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $name,
             'content' => '',
+            'status_id' => $status,
         ])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => '',
             'content' => $content,
+            'status_id' => $status,
+        ])
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        $this->putJson(route('api.posts.update', $post->id), [
+            'name' => $name,
+            'content' => $content,
+            'status_id' => '',
         ])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
         $this->assertDatabaseMissing('posts', [
            'name' => $name,
            'content' => $content,
+           'status_id' => $status
         ]);
         $this->assertDatabaseHas('posts', [
             'name' => $post->name,
             'content' => $post->content,
             'id' => $post->id,
+            'status_id' => $post->status_id,
         ]);
     }
 
@@ -73,6 +86,7 @@ class UpdatePostsTest extends TestCase
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => null,
             'content' => null,
+            'status_id' => null,
         ])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
@@ -80,6 +94,7 @@ class UpdatePostsTest extends TestCase
         $this->assertDatabaseHas('posts', [
             'name' => $post->name,
             'content' => $post->content,
+            'status_id' => $post->status_id,
             'id' => $post->id,
         ]);
     }
@@ -95,10 +110,12 @@ class UpdatePostsTest extends TestCase
         $post = Post::all()->random()->first();
         $name = $this->faker->name . self::ALTERED_STRING;
         $content = $this->faker->text . self::ALTERED_STRING;
+        $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
 
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $name,
             'content' => $content,
+            'status_id' => $status,
         ])
             ->assertOk();
 
@@ -106,6 +123,60 @@ class UpdatePostsTest extends TestCase
            'id' => $post->id,
            'name' => $name,
            'content' => $content,
+           'status_id' => $status
+        ]);
+    }
+
+    /** @test */
+    public function it_resets_published_at_when_post_is_updated_to_draft()
+    {
+        Sanctum::actingAs(
+            $this->utility->user,
+            ['*']
+        );
+
+        $post = Post::published()->get()->random()->first();
+
+        $this->putJson(route('api.posts.update', $post->id), [
+            'name' => $post->name,
+            'content' => $post->content,
+            'status_id' => Status::DRAFT,
+        ])
+            ->assertOk();
+
+        $this->assertDatabaseHas('posts', [
+            'id' => $post->id,
+            'name' => $post->name,
+            'content' => $post->content,
+            'published_at' => null,
+            'status_id' => Status::DRAFT,
+        ]);
+    }
+
+    /** @test */
+    public function it_sets_published_at_when_post_is_updated_to_published()
+    {
+        Sanctum::actingAs(
+            $this->utility->user,
+            ['*']
+        );
+
+        $post = Post::drafted()->get()->random()->first();
+
+        $this->putJson(route('api.posts.update', $post->id), [
+            'name' => $post->name,
+            'content' => $post->content,
+            'status_id' => Status::PUBLISHED,
+        ])
+            ->assertOk();
+        $publishedDate = now();
+
+        $this->assertDatabaseHas('posts', [
+            'id' => $post->id,
+            'name' => $post->name,
+            'content' => $post->content,
+            'published_at' => $publishedDate,
+            'status_id' => Status::PUBLISHED,
         ]);
     }
 }

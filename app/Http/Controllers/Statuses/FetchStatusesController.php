@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Statuses;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class FetchAllPostsController extends Controller
+class FetchStatusesController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -17,7 +17,7 @@ class FetchAllPostsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $posts = Post::published()->orderByPublished()->get();
-        return response()->json($posts);
+        $statuses = Status::all();
+        return response()->json($statuses);
     }
 }
