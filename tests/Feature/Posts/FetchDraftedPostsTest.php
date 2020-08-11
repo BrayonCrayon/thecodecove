@@ -32,12 +32,17 @@ class FetchDraftedPostsTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_allow_guest_to_get_drafted_posts()
+    {
+        $this->utility->loginGuest();
+        $this->getJson(route('api.posts.drafted'))
+            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+
+    /** @test */
     public function it_does_allow_auth_user_to_get_drafted_posts()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
+        $this->utility->loginAdmin();
 
         $posts = Post::drafted()->get();
         $response = $this->getJson(route('api.posts.drafted'))

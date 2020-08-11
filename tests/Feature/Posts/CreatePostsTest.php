@@ -36,12 +36,21 @@ class CreatePostsTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_allow_guest_to_create_post()
+    {
+        $this->utility->loginGuest();
+        $this->postJson(route('api.posts.store'), [
+            'name' => $this->faker->name,
+            'content' => $this->faker->text,
+            'userId' => $this->utility->user->id,
+        ])
+            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+
+    /** @test */
     public function it_does_allow_auth_users()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
+        $this->utility->loginAdmin();
 
         $name = $this->faker->name;
         $content = $this->faker->text;

@@ -13,21 +13,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::name('api.')->group(function() {
-
-    /*
-    *********************************************************
-    *** Public Auth Routes
-    *********************************************************
-    */
-
     /*
      *********************************************************
      *** Public Access Routes
      *********************************************************
      */
+
+    /*
+     *** Public Post Routes
+     */
     Route::get('posts', 'Blog\FetchAllPostsController')->name('posts');
     Route::get('posts/{post}', 'Blog\ViewPostsController')->name('posts.view');
+
+    /*
+     *** Public Status Routes
+     */
     Route::get('statuses', 'Statuses\FetchStatusesController')->name('statuses');
+
+    /*
+     *** Public Comment Routes
+     */
+    Route::get('comments/root/{post}', 'Comment\FetchRootCommentsController')->name('comments.root');
+    Route::get('comments/nested/{comment}', 'Comment\FetchNestedCommentsController')->name('comments.nested');
 
     /*
      *********************************************************
@@ -44,6 +51,15 @@ Route::name('api.')->group(function() {
         Route::delete('posts/{post}', 'Blog\DeletePostsController')->name('posts.delete');
         Route::put('posts/update/{post}', 'Blog\UpdatePostsController')->name('posts.update');
         Route::get('posts-drafted/', 'Blog\FetchDraftedPostsController')->name('posts.drafted');
+
+        /*
+         *********************************************************
+         *** Comment Routes
+         *********************************************************
+         */
+        Route::post('comments/store', 'Comment\StoreCommentController')->name('comment.store');
+        Route::put('comments/{comment}', 'Comment\UpdateCommentController')->name('comment.update');
+        Route::delete('comments/{comment}', 'Comment\DeleteCommentController')->name('comment.delete');
 
         /*
          *********************************************************

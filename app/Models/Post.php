@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
@@ -41,6 +42,13 @@ class Post extends Model
      */
     public function status() {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 
 

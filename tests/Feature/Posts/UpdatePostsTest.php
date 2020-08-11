@@ -37,12 +37,21 @@ class UpdatePostsTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_allow_guest_to_update_post()
+    {
+        $this->utility->loginGuest();
+        $post = Post::all()->random();
+        $this->putJson(route('api.posts.update', $post->id), [
+            'name' => $this->faker->name,
+            'content' => $this->faker->text,
+            'status_id' => $this->faker->randomElement([Status::DRAFT, Status::PUBLISHED]),
+        ])->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+
+    /** @test */
     public function it_does_allow_auth_user()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
+        $this->utility->loginAdmin();
         $post = Post::all()->random();
         $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
         $this->putJson(route('api.posts.update', $post->id), [

@@ -41,10 +41,7 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_does_allow_auth_user_to_register_new_users()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
+        $this->utility->loginAdmin();
         $newUser = Factory(User::class)->make();
 
         $this->postJson(route('register'), [

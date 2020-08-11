@@ -42,8 +42,8 @@ class FetchPostsTest extends TestCase
     /** @test */
     public function it_allows_users_to_access_posts()
     {
-        $this->actingAs($this->utility->user)
-            ->getJson(route('api.posts'))
+        $this->utility->loginAdmin();
+        $this->getJson(route('api.posts'))
             ->assertOk()
             ->assertJsonStructure([
                 [

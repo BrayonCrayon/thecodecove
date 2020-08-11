@@ -26,11 +26,7 @@ class FetchDraftedPostsTest extends TestCase
     /** @test */
     public function it_does_return_all_drafted_posts()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
-
+        $this->utility->loginAdmin();
         $posts = $this->getJson(route('api.posts.drafted'))
             ->assertOk()
             ->getOriginalContent();

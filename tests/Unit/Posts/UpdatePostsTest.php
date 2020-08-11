@@ -29,11 +29,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_empty_parameters()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
-
+        $this->utility->loginAdmin();
         $post = Post::all()->random()->first();
         $name = $this->faker->name . self::ALTERED_STRING;
         $content = $this->faker->text . self::ALTERED_STRING;
@@ -76,10 +72,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_undefined_parameters()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
+        $this->utility->loginAdmin();
 
         $post = Post::all()->random()->first();
 
@@ -102,10 +95,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_allows_post_to_be_updated()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
+        $this->utility->loginAdmin();
 
         $post = Post::all()->random()->first();
         $name = $this->faker->name . self::ALTERED_STRING;
@@ -130,11 +120,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_resets_published_at_when_post_is_updated_to_draft()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
-
+        $this->utility->loginAdmin();
         $post = Post::published()->get()->random()->first();
 
         $this->putJson(route('api.posts.update', $post->id), [
@@ -156,11 +142,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_sets_published_at_when_post_is_updated_to_published()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
-
+        $this->utility->loginAdmin();
         $post = Post::drafted()->get()->random()->first();
 
         $this->putJson(route('api.posts.update', $post->id), [

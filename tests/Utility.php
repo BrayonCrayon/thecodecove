@@ -5,6 +5,7 @@ namespace Tests;
 
 
 use App\Models\User;
+use Laravel\Sanctum\Sanctum;
 
 class Utility
 {
@@ -22,4 +23,26 @@ class Utility
         $this->user = User::get()->first();
     }
 
+    public function loginAdmin()
+    {
+        Sanctum::actingAs(
+            $this->user,
+            ['admin']
+        );
+        $this->user->createToken($this->user->name . '-token', ['admin']);
+    }
+
+    public function loginGuest()
+    {
+        Sanctum::actingAs(
+            $this->user,
+            ['guest']
+        );
+        $this->user->createToken($this->user->name . '-token', ['guest']);
+    }
+
+    public function getJson($uri, $data, $headers = [])
+    {
+        return $this->testInstance->json('GET', $uri, $data, $headers);
+    }
 }

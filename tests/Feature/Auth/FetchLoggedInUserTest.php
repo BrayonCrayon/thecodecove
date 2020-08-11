@@ -26,11 +26,7 @@ class FetchLoggedInUserTest extends TestCase
     /** @test */
     public function it_allows_auth_user_to_get_logged_in_user()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
-
+        $this->utility->loginAdmin();
         $this->getJson(route('api.auth.user'))
             ->assertOk()
             ->assertJsonFragment([

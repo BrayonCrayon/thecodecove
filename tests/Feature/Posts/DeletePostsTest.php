@@ -33,14 +33,18 @@ class DeletePostsTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_allow_guest_to_delete_post()
+    {
+        $this->utility->loginGuest();
+        $post = Post::all()->random();
+        $this->deleteJson(route('api.posts.delete', $post->id))
+            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+
+    /** @test */
     public function it_does_allow_auth_users_to_delete_post()
     {
-
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
-
+        $this->utility->loginAdmin();
         $post = Post::all()->random();
 
         $this->deleteJson(route('api.posts.delete', $post->id))

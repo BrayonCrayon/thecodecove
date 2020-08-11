@@ -2,7 +2,51 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9a0445c-8d08-4219-92a5-dfbda741a9ef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Helpers/UserHelper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/DeleteCommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/FetchNestedCommentsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/FetchRootCommentsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/StoreCommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/UpdateCommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Comment/StoreCommentRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Observers/CommentObserver.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/factories/CommentFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_11_160458_create_comments_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/CommentSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/CreateCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/DeleteCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/FetchCommentsTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/UpdateCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/CreateCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/DeleteCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/FetchCommentsTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/UpdateCommentTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthUserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/CreatePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/CreatePostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/DeletePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/DeletePostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/FetchDraftedPostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/FetchDraftedPostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/UpdatePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/UpdatePostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Statuses/FetchStatusesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Statuses/FetchStatusesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/FetchLoggedInUserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/FetchLoggedInUserTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/LogoutTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/LogoutTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/RegisterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/RegisterTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/CreatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/CreatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/DeletePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/DeletePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/FetchDraftedPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/FetchDraftedPostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/FetchPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/FetchPostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/UpdatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/UpdatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/CreatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/CreatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/DeletePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/DeletePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/FetchDraftedPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/FetchDraftedPostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/UpdatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/UpdatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utility.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Utility.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +251,8 @@
       <workItem from="1596649533651" duration="46000" />
       <workItem from="1596889950890" duration="3095000" />
       <workItem from="1596914891274" duration="599000" />
+      <workItem from="1597087580249" duration="8873000" />
+      <workItem from="1597156803972" duration="13036000" />
     </task>
     <servers />
   </component>
@@ -229,15 +275,23 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1230" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1596890586813">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state x="617" y="46" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597168170573">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="617" y="46" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597168170573" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597178853577">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1230" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1596890586813" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1596551056837" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597178853577" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1596649577760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1596649577760" />
+    <state x="753" y="227" key="NewPhpClassDialog" timestamp="1597177736018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="753" y="227" key="NewPhpClassDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597177736018" />
     <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1596891543270">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>

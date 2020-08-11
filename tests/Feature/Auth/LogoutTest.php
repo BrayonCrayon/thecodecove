@@ -34,11 +34,7 @@ class LogoutTest extends TestCase
     /** @test */
     public function it_does_allow_auth_user_to_logout()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
-
+        $this->utility->loginAdmin();
         $this->postJson(route('logout'))
             ->assertStatus(Response::HTTP_NO_CONTENT);
     }

@@ -43,10 +43,7 @@ class DeletePostsTest extends TestCase
     /** @test */
     public function it_does_allow_auth_user_to_delete_post_from_db()
     {
-        Sanctum::actingAs(
-            $this->utility->user,
-            ['*']
-        );
+        $this->utility->loginAdmin();
         $post = Post::all()->random();
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertOk();
