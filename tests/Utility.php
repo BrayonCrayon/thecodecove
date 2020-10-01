@@ -21,6 +21,7 @@ class Utility
     public function testSetup()
     {
         $this->user = User::get()->first();
+        $this->user->tokens()->delete();
     }
 
     public function loginAdmin()

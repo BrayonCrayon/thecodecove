@@ -18,6 +18,7 @@ class FetchAllPostsController extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::published()->orderByPublished()->get();
+        $posts->load('comments');
         return response()->json($posts);
     }
 }

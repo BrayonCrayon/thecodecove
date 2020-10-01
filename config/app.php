@@ -231,8 +231,8 @@ return [
 
     'developers' => [
         [
-            'name' => 'Brayon',
-            'email' => 'braydonalan@gmail.com',
+            'name' => 'Brayon Deroy',
+            'email' => 'test@gmail.com',
         ]
     ]
 

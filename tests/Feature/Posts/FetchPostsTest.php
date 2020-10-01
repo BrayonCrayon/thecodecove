@@ -34,7 +34,16 @@ class FetchPostsTest extends TestCase
                     'user_id',
                     'status_id',
                     'published_at',
-                    'created_at'
+                    'created_at',
+                    'comments' => [
+                        [
+                            'id',
+                            'post_id',
+                            'parent_id',
+                            'user_id',
+                            'text'
+                        ]
+                    ]
                 ]
             ]);
     }
@@ -53,7 +62,16 @@ class FetchPostsTest extends TestCase
                     'user_id',
                     'status_id',
                     'published_at',
-                    'created_at'
+                    'created_at',
+                    'comments' => [
+                        [
+                            'id',
+                            'post_id',
+                            'parent_id',
+                            'user_id',
+                            'text'
+                        ]
+                    ]
                 ]
             ]);
     }
