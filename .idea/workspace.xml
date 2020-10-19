@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d9a0445c-8d08-4219-92a5-dfbda741a9ef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Helpers/UserHelper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/DeleteCommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/FetchNestedCommentsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/FetchRootCommentsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/StoreCommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/UpdateCommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Comment/StoreCommentRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Observers/CommentObserver.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/factories/CommentFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_11_160458_create_comments_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/CommentSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/CreateCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/DeleteCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/FetchCommentsTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/UpdateCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/CreateCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/DeleteCommentTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/FetchCommentsTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/UpdateCommentTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthUserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/CreatePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/CreatePostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/DeletePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/DeletePostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/FetchDraftedPostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/FetchDraftedPostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/UpdatePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/UpdatePostsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Statuses/FetchStatusesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Statuses/FetchStatusesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/FetchLoggedInUserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/FetchLoggedInUserTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/LogoutTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/LogoutTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/RegisterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/RegisterTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/CreatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/CreatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/DeletePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/DeletePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/FetchDraftedPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/FetchDraftedPostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/FetchPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/FetchPostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/UpdatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/UpdatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/CreatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/CreatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/DeletePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/DeletePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/FetchDraftedPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/FetchDraftedPostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/UpdatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/UpdatePostsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Utility.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Utility.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/scrivo/highlight.php" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector_compare" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1ddNu9QAX3D9YtFomkawkBsmdn5" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs.protractor.protractor_package" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="ts.external.directory.path" value="C:\laragon\www\thecodecove\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\thecodecove\app\Http\Controllers\Statuses" />
+      <recent name="C:\laragon\www\thecodecove\resources\js\components" />
+      <recent name="C:\laragon\www\thecodecove\app\Http\Controllers\Blog" />
+      <recent name="C:\laragon\www\thecodecove\app\Models" />
+      <recent name="C:\laragon\www\thecodecove\resources\views\public_pages" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\thecodecove" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d9a0445c-8d08-4219-92a5-dfbda741a9ef" name="Default Changelist" comment="" />
+      <created>1592751229825</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592751229825</updated>
+      <workItem from="1592751231002" duration="2264000" />
+      <workItem from="1592753877246" duration="20000" />
+      <workItem from="1592829007320" duration="108000" />
+      <workItem from="1592832191559" duration="17539000" />
+      <workItem from="1592918686894" duration="3297000" />
+      <workItem from="1593001849290" duration="12793000" />
+      <workItem from="1593090030432" duration="15017000" />
+      <workItem from="1593172007649" duration="1942000" />
+      <workItem from="1593186316374" duration="705000" />
+      <workItem from="1593450045524" duration="12962000" />
+      <workItem from="1593533004245" duration="13618000" />
+      <workItem from="1593611382172" duration="15639000" />
+      <workItem from="1593718328460" duration="5697000" />
+      <workItem from="1594034864546" duration="12998000" />
+      <workItem from="1594135960423" duration="188000" />
+      <workItem from="1594299336287" duration="2889000" />
+      <workItem from="1594377105882" duration="2690000" />
+      <workItem from="1594646002244" duration="2925000" />
+      <workItem from="1594988100518" duration="600000" />
+      <workItem from="1595102077398" duration="604000" />
+      <workItem from="1595337467509" duration="106000" />
+      <workItem from="1596142503063" duration="5268000" />
+      <workItem from="1596199985508" duration="8229000" />
+      <workItem from="1596548766022" duration="804000" />
+      <workItem from="1596550280246" duration="3397000" />
+      <workItem from="1596649533651" duration="46000" />
+      <workItem from="1596889950890" duration="3095000" />
+      <workItem from="1596914891274" duration="599000" />
+      <workItem from="1597087580249" duration="8873000" />
+      <workItem from="1597156803972" duration="13036000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="617" y="46" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597168170573">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="617" y="46" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597168170573" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597178853577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1230" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1596890586813" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597178853577" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1596649577760">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1596649577760" />
+    <state x="753" y="227" key="NewPhpClassDialog" timestamp="1597177736018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="753" y="227" key="NewPhpClassDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597177736018" />
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1596891543270">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1596891543270" />
+  </component>
+</project>
