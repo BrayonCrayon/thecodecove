@@ -18,6 +18,8 @@ Route::name('api.')->group(function() {
      *** Public Access Routes
      *********************************************************
      */
+    Route::post('login/social', 'Auth\LoginWithSocialController')->name('login.social');
+    Route::get('login/social/callback', 'Auth\LoginWithSocialController@callback')->name('login.social.callback');
 
     /*
      *** Public Post Routes

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'avatar', 'provider', 'provider_id', 'email_verified_at'
     ];
 
     /**
@@ -36,4 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $with = [
+        'tokens',
+    ];
+
+    /*
+     ****************************
+     * Scope Queries
+     ****************************
+     */
+    public function scopeEmailIs($query, $email)
+    {
+        return $query->where('email', $email);
+    }
 }

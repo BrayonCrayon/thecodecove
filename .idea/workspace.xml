@@ -2,51 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9a0445c-8d08-4219-92a5-dfbda741a9ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Helpers/UserHelper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/DeleteCommentController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/FetchNestedCommentsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/FetchRootCommentsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/StoreCommentController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Comment/UpdateCommentController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Comment/StoreCommentRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Observers/CommentObserver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/CommentFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_11_160458_create_comments_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/CommentSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/CreateCommentTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/DeleteCommentTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/FetchCommentsTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Feature/Comments/UpdateCommentTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/CreateCommentTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/DeleteCommentTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/FetchCommentsTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Comments/UpdateCommentTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthUserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/CreatePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/CreatePostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/DeletePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/DeletePostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/FetchDraftedPostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/FetchDraftedPostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Blog/UpdatePostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Blog/UpdatePostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Statuses/FetchStatusesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Statuses/FetchStatusesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/FetchLoggedInUserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/FetchLoggedInUserTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/LogoutTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/LogoutTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Auth/RegisterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Auth/RegisterTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/CreatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/CreatePostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/DeletePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/DeletePostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/FetchDraftedPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/FetchDraftedPostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/FetchPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/FetchPostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Posts/UpdatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Posts/UpdatePostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/CreatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/CreatePostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/DeletePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/DeletePostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/FetchDraftedPostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/FetchDraftedPostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/Posts/UpdatePostsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/Posts/UpdatePostsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Utility.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Utility.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginWithSocialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginWithSocialController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,6 +131,8 @@
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/vendor/symfony/css-selector_compare" />
       <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
+      <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
+      <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ddNu9QAX3D9YtFomkawkBsmdn5" />
@@ -184,14 +145,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wiki-app" />
     <property name="nodejs.protractor.protractor_package" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\laragon\www\thecodecove\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -252,7 +214,26 @@
       <workItem from="1596889950890" duration="3095000" />
       <workItem from="1596914891274" duration="599000" />
       <workItem from="1597087580249" duration="8873000" />
-      <workItem from="1597156803972" duration="13036000" />
+      <workItem from="1597156803972" duration="13437000" />
+      <workItem from="1597320064134" duration="12881000" />
+      <workItem from="1597760810192" duration="7585000" />
+      <workItem from="1597785801338" duration="6000" />
+      <workItem from="1598280670826" duration="4943000" />
+      <workItem from="1598445949275" duration="2093000" />
+      <workItem from="1598544582904" duration="7000" />
+      <workItem from="1600287162020" duration="607000" />
+      <workItem from="1600383739901" duration="121000" />
+      <workItem from="1600694187088" duration="5161000" />
+      <workItem from="1600780135850" duration="1343000" />
+      <workItem from="1600895977928" duration="20000" />
+      <workItem from="1601207861019" duration="1306000" />
+      <workItem from="1601323716915" duration="7136000" />
+      <workItem from="1601567891477" duration="4886000" />
+      <workItem from="1601586335891" duration="3688000" />
+      <workItem from="1601739082089" duration="1392000" />
+      <workItem from="1601840867294" duration="7348000" />
+      <workItem from="1601988129436" duration="1908000" />
+      <workItem from="1602623749134" duration="2037000" />
     </task>
     <servers />
   </component>
@@ -279,19 +260,24 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="617" y="46" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597168170573" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597178853577">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597322557632">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1230" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1596890586813" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597178853577" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1596649577760">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597322557632" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1602628048222">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1596649577760" />
-    <state x="753" y="227" key="NewPhpClassDialog" timestamp="1597177736018">
+    <state x="-1180" y="275" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1602004972068" />
+    <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602628048222" />
+    <state x="753" y="227" key="NewPhpClassDialog" timestamp="1601589413896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="753" y="227" key="NewPhpClassDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597177736018" />
+    <state x="753" y="227" key="NewPhpClassDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1601589413896" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1601587614754">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1601587614754" />
     <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1596891543270">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
