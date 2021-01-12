@@ -232,7 +232,11 @@ return [
     'developers' => [
         [
             'name' => 'Brayon Deroy',
-            'email' => 'test@gmail.com',
+            'email' => 'brayonderoy@thecodecove.ca',
+        ],
+        [
+            'name' => 'Allison Speck',
+            'email' => 'allisonspeck@thecodecove.ca'
         ]
     ]
 
