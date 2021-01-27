@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class UpdatePostsController extends Controller
 {
@@ -33,11 +34,7 @@ class UpdatePostsController extends Controller
             'status_id' => 'required|exists:statuses,id',
         ]);
 
-        if ($this->userHelper->isAuthUserGuest()) {
-            return response()
-                ->json(['error' => "Unauthorized to create Post."])
-                ->setStatusCode(Response::HTTP_UNAUTHORIZED);
-        }
+        Gate::authorize('is-admin');
 
         // use $request->validated()
         $post->update($request->all());

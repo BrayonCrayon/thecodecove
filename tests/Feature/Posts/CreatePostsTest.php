@@ -44,7 +44,7 @@ class CreatePostsTest extends TestCase
             'content' => $this->faker->text,
             'userId' => $this->utility->user->id,
         ])
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */

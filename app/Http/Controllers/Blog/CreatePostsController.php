@@ -9,6 +9,7 @@ use App\Models\Status;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class CreatePostsController extends Controller
 {
@@ -27,11 +28,7 @@ class CreatePostsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        if ($this->userHelper->isAuthUserGuest()) {
-            return response()
-                ->json(['error' => "Unauthorized to create Post."])
-                ->setStatusCode(Response::HTTP_UNAUTHORIZED);
-        }
+        Gate::authorize('is-admin');
 
         $request->validate([
             'name' => 'string',

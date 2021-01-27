@@ -28,7 +28,7 @@ class FetchDraftedPostsTest extends TestCase
     public function it_does_not_allow_non_auth_users_to_get_drafted_posts()
     {
         $this->getJson(route('api.posts.drafted'))
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+            ->assertUnauthorized();
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class FetchDraftedPostsTest extends TestCase
     {
         $this->utility->loginGuest();
         $this->getJson(route('api.posts.drafted'))
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+            ->assertForbidden();
     }
 
     /** @test */

@@ -45,7 +45,7 @@ class UpdatePostsTest extends TestCase
             'name' => $this->faker->name,
             'content' => $this->faker->text,
             'status_id' => $this->faker->randomElement([Status::DRAFT, Status::PUBLISHED]),
-        ])->assertStatus(Response::HTTP_UNAUTHORIZED);
+        ])->assertForbidden();
     }
 
     /** @test */

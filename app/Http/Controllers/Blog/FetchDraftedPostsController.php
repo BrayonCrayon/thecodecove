@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class FetchDraftedPostsController extends Controller
 {
@@ -26,12 +27,7 @@ class FetchDraftedPostsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        // Use a gate
-        if ($this->userHelper->isAuthUserGuest()) {
-            return response()
-                ->json(['error' => "Unauthorized to fetch drafted Posts."])
-                ->setStatusCode(Response::HTTP_UNAUTHORIZED);
-        }
+        Gate::authorize('is-admin');
 
         $draftedPosts = Post::drafted()->get();
         return response()->json($draftedPosts);
