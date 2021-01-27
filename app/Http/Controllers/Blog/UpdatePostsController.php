@@ -28,7 +28,7 @@ class UpdatePostsController extends Controller
      */
     public function __invoke(Request $request, Post $post)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string',
             'content' => 'required|string',
             'status_id' => 'required|exists:statuses,id',
@@ -36,8 +36,7 @@ class UpdatePostsController extends Controller
 
         Gate::authorize('is-admin');
 
-        // use $request->validated()
-        $post->update($request->all());
+        $post->update($validated);
 
         if ($request->get('status_id') === Status::PUBLISHED) {
             $post->update([
