@@ -143,7 +143,7 @@ class UpdatePostsTest extends TestCase
     public function it_sets_published_at_when_post_is_updated_to_published()
     {
         $this->utility->loginAdmin();
-        $post = Post::drafted()->get()->random()->first();
+        $post = Post::drafted()->first();
 
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $post->name,
@@ -157,7 +157,7 @@ class UpdatePostsTest extends TestCase
             'id' => $post->id,
             'name' => $post->name,
             'content' => $post->content,
-            'published_at' => $publishedDate,
+            'published_at' => $publishedDate->toDateTimeString(),
             'status_id' => Status::PUBLISHED,
         ]);
     }

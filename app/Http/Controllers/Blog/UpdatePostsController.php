@@ -38,17 +38,6 @@ class UpdatePostsController extends Controller
 
         $post->update($validated);
 
-        if ($request->get('status_id') === Status::PUBLISHED) {
-            $post->update([
-                'published_at' => now(),
-            ]);
-        } else {
-            $post->update([
-                'published_at' => null,
-                'status_id' => Status::DRAFT,
-            ]);
-        }
-
         return response()->json('success');
     }
 }
