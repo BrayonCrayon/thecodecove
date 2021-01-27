@@ -31,4 +31,23 @@ class LoginTest extends TestCase
         ])
             ->assertStatus(Response::HTTP_NO_CONTENT);
     }
+
+    /** @test */
+    public function it_does_not_allow_user_to_login_with_invalid_credentials()
+    {
+        $this->postJson(route('login'), [
+            'email' => $this->faker->email,
+            'password' => $this->faker->word,
+        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+        ->assertJsonFragment([
+            "message" => "The given data was invalid.",
+            "errors" => [
+                "email" => [
+                    "These credentials do not match our records."
+                ]
+            ]
+        ]);
+
+        $this->assertNull(auth()->user(), "A user was logged in with invalid credentials.");
+    }
 }
