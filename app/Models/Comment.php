@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Comment extends Model
 {
     use SoftDeletes;
+    // No need for fillable since you have defined guarded as an empty array
     protected $fillable = [
         'text',
         'post_id',
@@ -71,6 +72,7 @@ class Comment extends Model
      * @return HasMany
      */
     public function comments() {
+        // Might be better to orderByDesc('id') for query performance
         return $this->hasMany(Comment::class, 'parent_id', 'id')->orderByDesc('created_at');
     }
 

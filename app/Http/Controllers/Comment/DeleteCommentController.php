@@ -19,6 +19,7 @@ class DeleteCommentController extends Controller
     public function __invoke(Request $request, Comment $comment)
     {
         $comment->delete();
+        // use response()->notContent()
         return response()->json('success');
     }
 }

@@ -26,6 +26,7 @@ class FetchDraftedPostsController extends Controller
      */
     public function __invoke(Request $request)
     {
+        // Use a gate
         if ($this->userHelper->isAuthUserGuest()) {
             return response()
                 ->json(['error' => "Unauthorized to fetch drafted Posts."])

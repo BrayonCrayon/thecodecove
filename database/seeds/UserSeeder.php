@@ -12,8 +12,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        collect(config('app.developers', []))->each(function ($developer) {
-            Factory(User::class)->create([
+        collect(config('app.developers')) // Put the empty array default value in the config file
+            ->each(function ($developer) {
+            factory(User::class)->create([
                 'name' => $developer['name'],
                 'email'=> $developer['email'],
             ]);

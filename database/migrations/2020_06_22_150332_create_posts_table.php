@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('status_id')->default(Status::DRAFT);
             $table->dateTime('published_at')->nullable();
-            $table->softDeletes();
+            $table->softDeletes(); // I would put this after timestamps......OCD
             $table->timestamps();
         });
     }

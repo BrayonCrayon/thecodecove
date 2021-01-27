@@ -62,6 +62,7 @@ class CommentRelationshipTest extends TestCase
         });
     }
 
+    // Make this the first function in this class
     protected function setUp(): void
     {
         parent::setUp();

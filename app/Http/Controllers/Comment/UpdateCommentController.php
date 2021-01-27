@@ -22,6 +22,7 @@ class UpdateCommentController extends Controller
             'text' => 'required|string',
         ]);
         $comment->update($request->all());
+        // Return the updated model
         return response()->json('success');
     }
 }

@@ -13,6 +13,7 @@ class UserHelper
 
     public function isAuthUserAdmin()
     {
+        // Move this into a gate
         return self::getAuthUserTokens()->contains("admin");
     }
 

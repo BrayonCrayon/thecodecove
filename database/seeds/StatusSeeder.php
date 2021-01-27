@@ -15,15 +15,9 @@ class StatusSeeder extends Seeder
         Status::updateOrCreate(
             [
                 'name' => 'draft',
-            ],
-            [
-                'name' => 'draft',
             ]
         );
         Status::updateOrCreate(
-            [
-                'name' => 'published',
-            ],
             [
                 'name' => 'published',
             ]

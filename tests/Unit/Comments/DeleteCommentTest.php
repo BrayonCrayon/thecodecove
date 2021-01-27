@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use tests\TestCase;
 use Tests\Utility;
 
@@ -62,19 +63,19 @@ class DeleteCommentTest extends TestCase
     /** @test */
     public function it_does_allow_admin_user_to_remove_comments()
     {
+        Carbon::setTestNow(now());
         $this->utility->loginAdmin();
         $comment = Post::all()->random()->comments()->first();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
 
-        $commentDeletedDate = now();
         $this->assertDatabaseHas('comments', [
             'id' => $comment->id,
             'post_id' => $comment->post_id,
             'parent_id' => $comment->parent_id,
             'user_id' => $comment->user_id,
             'text' => $comment->text,
-            'deleted_at' => $commentDeletedDate,
+            'deleted_at' => now(),
         ]);
     }
 }

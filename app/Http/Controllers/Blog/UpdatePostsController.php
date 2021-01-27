@@ -39,6 +39,7 @@ class UpdatePostsController extends Controller
                 ->setStatusCode(Response::HTTP_UNAUTHORIZED);
         }
 
+        // use $request->validated()
         $post->update($request->all());
 
         if ($request->get('status_id') === Status::PUBLISHED) {
