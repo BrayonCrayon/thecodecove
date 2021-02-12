@@ -34,9 +34,9 @@ class FetchDraftedPostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_guest_to_get_drafted_posts()
     {
-        $this->utility->loginGuest();
+        $this->utility->loginUser();
         $this->getJson(route('api.posts.drafted'))
-            ->assertForbidden();
+            ->assertNotFound();
     }
 
     /** @test */

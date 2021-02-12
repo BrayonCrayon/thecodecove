@@ -33,13 +33,9 @@ class Utility
         $this->user->createToken($this->user->name . '-token', ['admin']);
     }
 
-    public function loginGuest()
+    public function loginUser()
     {
-        Sanctum::actingAs(
-            $this->user,
-            ['guest']
-        );
-        $this->user->createToken($this->user->name . '-token', ['guest']);
+        Sanctum::actingAs($this->user);
     }
 
     public function getJson($uri, $data, $headers = [])

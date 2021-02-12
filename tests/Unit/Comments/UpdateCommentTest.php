@@ -28,7 +28,7 @@ class UpdateCommentTest extends TestCase
     public function it_does_not_allow_empty_text_data()
     {
         $this->utility->loginAdmin();
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
 
         $this->putJson(route('api.comment.update', $comment->id), [
             'text' => ''
@@ -40,7 +40,7 @@ class UpdateCommentTest extends TestCase
     public function it_does_not_allow_undefined_text_data()
     {
         $this->utility->loginAdmin();
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
 
         $this->putJson(route('api.comment.update', $comment->id), [
             'text' => null,
@@ -53,7 +53,7 @@ class UpdateCommentTest extends TestCase
     {
         $this->utility->loginAdmin();
         $newCommentText = $this->faker->text . '_TEST';
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
 
         $this->putJson(route('api.comment.update', $comment->id), [
             'text' => $newCommentText,

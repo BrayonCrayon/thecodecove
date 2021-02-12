@@ -26,7 +26,7 @@ class ViewPostTest extends TestCase
     /** @test */
     public function it_brings_back_existing_post()
     {
-        $post = Post::all()->random()->first();
+        $post = Post::all()->first();
         $post->load('comments');
         $data = $this->getJson(route('api.posts.view', [
             'post' => $post->id,

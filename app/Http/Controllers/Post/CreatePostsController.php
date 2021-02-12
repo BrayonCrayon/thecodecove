@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Post;
 
 use App\Helpers\UserHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\CreatePostRequest;
 use App\Models\Post;
 use App\Models\Status;
 use Illuminate\Http\JsonResponse;
@@ -23,18 +24,12 @@ class CreatePostsController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param Request $request
+     * @param CreatePostRequest $request
      * @return JsonResponse|Response|object
      */
-    public function __invoke(Request $request)
+    public function __invoke(CreatePostRequest $request)
     {
         Gate::authorize('is-admin');
-
-        $request->validate([
-            'name' => 'string',
-            'content' => 'string',
-            'userId' => 'integer|exists:users,id',
-        ]);
 
         $post = Post::create([
             'name' => $request->get('name'),

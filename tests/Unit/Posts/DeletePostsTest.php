@@ -27,7 +27,7 @@ class DeletePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_auth_users_to_delete_post_from_db()
     {
-        $post = Post::all()->random();
+        $post = Post::first();
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
 
@@ -44,7 +44,7 @@ class DeletePostsTest extends TestCase
     public function it_does_allow_auth_user_to_delete_post_from_db()
     {
         $this->utility->loginAdmin();
-        $post = Post::all()->random();
+        $post = Post::first();
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertOk();
 

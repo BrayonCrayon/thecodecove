@@ -24,8 +24,8 @@ Route::get('login/social/callback', 'Auth\LoginWithSocialController@callback')->
 /*
  *** Public Post Routes
  */
-Route::get('posts', 'Blog\FetchAllPostsController')->name('posts');
-Route::get('posts/{post}', 'Blog\ViewPostsController')->name('posts.view');
+Route::get('posts', 'Post\FetchAllPostsController')->name('posts');
+Route::get('posts/{post}', 'Post\ViewPostsController')->name('posts.view');
 
 /*
  *** Public Status Routes
@@ -49,11 +49,10 @@ Route::middleware('auth:sanctum')->group(function () {
      *** Post Routes
      *********************************************************
      */
-    // Nice use of single action controllers
-    Route::post('posts/store', 'Blog\CreatePostsController')->name('posts.store');
-    Route::delete('posts/{post}', 'Blog\DeletePostsController')->name('posts.delete');
-    Route::put('posts/update/{post}', 'Blog\UpdatePostsController')->name('posts.update');
-    Route::get('posts-drafted/', 'Blog\FetchDraftedPostsController')->name('posts.drafted');
+    Route::post('posts/store', 'Post\CreatePostsController')->name('posts.store');
+    Route::delete('posts/{post}', 'Post\DeletePostsController')->name('posts.delete');
+    Route::put('posts/update/{post}', 'Post\UpdatePostsController')->name('posts.update');
+    Route::get('posts-drafted/', 'Post\FetchDraftedPostsController')->name('posts.drafted');
 
     /*
      *********************************************************

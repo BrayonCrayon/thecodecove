@@ -3,26 +3,22 @@
 namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Comment\UpdateCommentRequest;
 use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UpdateCommentController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param Request $request
+     * @param UpdateCommentRequest $request
      * @param Comment $comment
      * @return JsonResponse
      */
-    public function __invoke(Request $request, Comment $comment)
+    public function __invoke(UpdateCommentRequest $request, Comment $comment)
     {
-        $request->validate([
-            'text' => 'required|string',
-        ]);
-        $comment->update($request->all());
-        // Return the updated model
-        return response()->json('success');
+        $comment->update($request->validated());
+        return response()->json($comment);
     }
 }

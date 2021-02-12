@@ -30,7 +30,7 @@ class UpdatePostsTest extends TestCase
     public function it_does_not_allow_empty_parameters()
     {
         $this->utility->loginAdmin();
-        $post = Post::all()->random()->first();
+        $post = Post::first()->first();
         $name = $this->faker->name . self::ALTERED_STRING;
         $content = $this->faker->text . self::ALTERED_STRING;
         $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
@@ -74,7 +74,7 @@ class UpdatePostsTest extends TestCase
     {
         $this->utility->loginAdmin();
 
-        $post = Post::all()->random()->first();
+        $post = Post::first()->first();
 
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => null,
@@ -97,7 +97,7 @@ class UpdatePostsTest extends TestCase
     {
         $this->utility->loginAdmin();
 
-        $post = Post::all()->random()->first();
+        $post = Post::first()->first();
         $name = $this->faker->name . self::ALTERED_STRING;
         $content = $this->faker->text . self::ALTERED_STRING;
         $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
@@ -121,7 +121,7 @@ class UpdatePostsTest extends TestCase
     public function it_resets_published_at_when_post_is_updated_to_draft()
     {
         $this->utility->loginAdmin();
-        $post = Post::published()->get()->random()->first();
+        $post = Post::published()->get()->first();
 
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $post->name,

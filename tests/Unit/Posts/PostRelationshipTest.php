@@ -16,7 +16,7 @@ class PostRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_correct_user_from_posts_user_relationship()
     {
-        $post = Post::all()->random();
+        $post = Post::first();
         $queriedUser = User::findOrFail($post->user_id);
 
         $this->assertEquals($queriedUser, $post->user, "Post user relationship did not bring back correct user object");
@@ -30,7 +30,7 @@ class PostRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_correct_status_from_posts_status_relationship()
     {
-        $post = Post::all()->random();
+        $post = Post::first();
         $queriedStatus = Status::findOrFail($post->status_id);
 
         $this->assertEquals($queriedStatus, $post->status, "Post status relationship did not bring back correct status object");
@@ -43,7 +43,7 @@ class PostRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_correct_comments_from_posts_comment_relationship()
     {
-        $post = Post::all()->random();
+        $post = Post::first();
         $queriedComments = Comment::isRootComment()->postIs($post->id)->get();
 
         $queriedComments->each(function ($item) use ($post) {
