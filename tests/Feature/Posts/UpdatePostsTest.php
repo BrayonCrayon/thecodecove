@@ -53,11 +53,18 @@ class UpdatePostsTest extends TestCase
     {
         $this->utility->loginAdmin();
         $post = Post::first();
-        $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
+        $post->name = $this->faker->name . "-test";
+        $post->content = $this->faker->text . "-test";
+        $post->status_id = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
         $this->putJson(route('api.posts.update', $post->id), [
-            'name' => $this->faker->name,
-            'content' => $this->faker->text,
-            'status_id' => $status,
-        ])->assertOk();
+            'name' => $post->name,
+            'content' => $post->content,
+            'status_id' => $post->status_id,
+        ])->assertOk()
+        ->assertJsonFragment([
+            'name' => $post->name,
+            'content' => $post->content,
+            'status_id' => $post->status_id
+        ]);
     }
 }

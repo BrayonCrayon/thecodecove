@@ -50,7 +50,6 @@ class CreatePostsTest extends TestCase
     /** @test */
     public function it_does_allow_auth_users()
     {
-        $this->withoutExceptionHandling();
         $this->utility->loginAdmin();
 
         $name = $this->faker->name;

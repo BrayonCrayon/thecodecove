@@ -29,6 +29,6 @@ class UpdatePostsController extends Controller
     {
         Gate::authorize('is-admin');
         $post->update($request->validated());
-        return response()->json('success');
+        return response()->json($post);
     }
 }
