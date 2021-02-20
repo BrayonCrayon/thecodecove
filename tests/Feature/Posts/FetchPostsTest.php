@@ -27,7 +27,7 @@ class FetchPostsTest extends TestCase
         $this->getJson(route('api.posts'))
             ->assertOk()
             ->assertJsonStructure([
-                [
+                'data' => [
                     'id',
                     'name',
                     'content',
