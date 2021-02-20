@@ -103,4 +103,25 @@ class ViewPostTest extends TestCase
                 'parent_id' => $comment->parent_id,
             ]);
     }
+
+    /** @test */
+    public function it_returns_related_user_on_post_comments()
+    {
+        $post = factory(Post::class)->create([
+            'status_id' => Status::DRAFT,
+            'published_at' => null,
+        ]);
+        $comment = factory(Comment::class)->create([
+            'parent_id' => null,
+            'post_id' => $post->id,
+        ]);
+        $this->getJson(route('api.posts.view', $post->id))
+            ->assertOk()
+            ->assertJsonFragment([
+                'text' => $comment->text,
+                'post_id' => $comment->post_id,
+                'user_id' => $comment->user_id,
+                'parent_id' => $comment->parent_id,
+            ]);
+    }
 }
