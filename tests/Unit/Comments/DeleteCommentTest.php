@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use tests\TestCase;
 use Tests\Utility;
 
@@ -27,7 +28,7 @@ class DeleteCommentTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_logged_in_users_to_remove_comment()
     {
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
 
@@ -43,8 +44,8 @@ class DeleteCommentTest extends TestCase
     /** @test */
     public function it_does_allow_logged_in_users_to_remove_comments()
     {
-        $this->utility->loginGuest();
-        $comment = Post::all()->random()->comments()->first();
+        $this->utility->loginUser();
+        $comment = Post::first()->comments()->first();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
 
@@ -62,19 +63,19 @@ class DeleteCommentTest extends TestCase
     /** @test */
     public function it_does_allow_admin_user_to_remove_comments()
     {
+        Carbon::setTestNow(now());
         $this->utility->loginAdmin();
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
 
-        $commentDeletedDate = now();
         $this->assertDatabaseHas('comments', [
             'id' => $comment->id,
             'post_id' => $comment->post_id,
             'parent_id' => $comment->parent_id,
             'user_id' => $comment->user_id,
             'text' => $comment->text,
-            'deleted_at' => $commentDeletedDate,
+            'deleted_at' => now(),
         ]);
     }
 }

@@ -27,7 +27,7 @@ class UpdateCommentTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_logged_in_users_to_update_comment()
     {
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
         $newCommentText = $this->faker->text;
 
         $this->putJson(route('api.comment.update', $comment->id), [
@@ -39,8 +39,8 @@ class UpdateCommentTest extends TestCase
     /** @test */
     public function it_does_allow_guests_to_update_comments()
     {
-        $this->utility->loginGuest();
-        $comment = Post::all()->random()->comments()->first();
+        $this->utility->loginUser();
+        $comment = Post::first()->comments()->first();
         $newCommentText = $this->faker->text;
 
         $this->putJson(route('api.comment.update', $comment->id), [
@@ -53,7 +53,7 @@ class UpdateCommentTest extends TestCase
     public function it_does_allow_admin_to_update_comments()
     {
         $this->utility->loginAdmin();
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
         $newCommentText = $this->faker->text;
 
         $this->putJson(route('api.comment.update', $comment->id), [

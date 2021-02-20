@@ -15,7 +15,7 @@ class CommentRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_user_that_created_the_comment()
     {
-        $comment = Comment::all()->random();
+        $comment = Comment::first();
         $user = User::findOrFail($comment->user_id);
 
         $this->assertEquals($user, $comment->user, "Comment user relationship did not bring back correct user object");
@@ -29,7 +29,7 @@ class CommentRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_post_that_the_comment_is_attached_to()
     {
-        $comment = Comment::isRootComment()->get()->random();
+        $comment = Comment::isRootComment()->first();
         $post = Post::findOrFail($comment->post_id);
 
         $this->assertEquals($post, $comment->post, "Comment post relationship did not bring back correct post object");
@@ -62,6 +62,7 @@ class CommentRelationshipTest extends TestCase
         });
     }
 
+    // Make this the first function in this class
     protected function setUp(): void
     {
         parent::setUp();

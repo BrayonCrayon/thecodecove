@@ -14,6 +14,9 @@ class CommentObserver
      */
     public function deleted(Comment $comment)
     {
+        /*
+         * Might want to change this to deleting and delete the child comments before the parent
+         */
         if ($comment->comments()->count() > 0) {
             $comment->comments()->delete();
         }

@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Post;
 
 use App\Helpers\UserHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\CreatePostRequest;
 use App\Models\Post;
 use App\Models\Status;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class CreatePostsController extends Controller
 {
@@ -22,22 +24,12 @@ class CreatePostsController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param Request $request
+     * @param CreatePostRequest $request
      * @return JsonResponse|Response|object
      */
-    public function __invoke(Request $request)
+    public function __invoke(CreatePostRequest $request)
     {
-        if ($this->userHelper->isAuthUserGuest()) {
-            return response()
-                ->json(['error' => "Unauthorized to create Post."])
-                ->setStatusCode(Response::HTTP_UNAUTHORIZED);
-        }
-
-        $request->validate([
-            'name' => 'string',
-            'content' => 'string',
-            'userId' => 'integer|exists:users,id',
-        ]);
+        Gate::authorize('is-admin');
 
         $post = Post::create([
             'name' => $request->get('name'),

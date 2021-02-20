@@ -28,7 +28,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_auth_users()
     {
-        $post = Post::all()->random();
+        $post = Post::first();
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $this->faker->name,
             'content' => $this->faker->text,
@@ -39,25 +39,32 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_guest_to_update_post()
     {
-        $this->utility->loginGuest();
-        $post = Post::all()->random();
+        $this->utility->loginUser();
+        $post = Post::first();
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $this->faker->name,
             'content' => $this->faker->text,
             'status_id' => $this->faker->randomElement([Status::DRAFT, Status::PUBLISHED]),
-        ])->assertStatus(Response::HTTP_UNAUTHORIZED);
+        ])->assertNotFound();
     }
 
     /** @test */
     public function it_does_allow_auth_user()
     {
         $this->utility->loginAdmin();
-        $post = Post::all()->random();
-        $status = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
+        $post = Post::first();
+        $post->name = $this->faker->name . "-test";
+        $post->content = $this->faker->text . "-test";
+        $post->status_id = $post->status_id === Status::DRAFT ? Status::PUBLISHED : Status::DRAFT;
         $this->putJson(route('api.posts.update', $post->id), [
-            'name' => $this->faker->name,
-            'content' => $this->faker->text,
-            'status_id' => $status,
-        ])->assertOk();
+            'name' => $post->name,
+            'content' => $post->content,
+            'status_id' => $post->status_id,
+        ])->assertOk()
+        ->assertJsonFragment([
+            'name' => $post->name,
+            'content' => $post->content,
+            'status_id' => $post->status_id
+        ]);
     }
 }

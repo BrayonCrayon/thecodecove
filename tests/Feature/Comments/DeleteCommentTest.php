@@ -27,7 +27,7 @@ class DeleteCommentTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_logged_in_users_to_remove_comment()
     {
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
@@ -35,8 +35,8 @@ class DeleteCommentTest extends TestCase
     /** @test */
     public function it_does_allow_guest_to_remove_comments()
     {
-        $this->utility->loginGuest();
-        $comment = Post::all()->random()->comments()->first();
+        $this->utility->loginUser();
+        $comment = Post::first()->comments()->first();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
     }
@@ -45,7 +45,7 @@ class DeleteCommentTest extends TestCase
     public function it_does_allow_admin_user_to_remove_comments()
     {
         $this->utility->loginAdmin();
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
     }

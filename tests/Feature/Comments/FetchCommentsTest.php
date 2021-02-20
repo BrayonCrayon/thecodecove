@@ -25,7 +25,7 @@ class FetchCommentsTest extends TestCase
     /** @test */
     public function it_allows_non_logged_in_users_to_fetch_comments()
     {
-        $post = Post::all()->random();
+        $post = Post::first();
         $response = $this->getJson(route('api.comments.root', $post->id))
             ->assertOk()
             ->assertJsonCount($post->comments()->count())
@@ -54,7 +54,7 @@ class FetchCommentsTest extends TestCase
     public function it_allows_admins_to_fetch_comments_of_a_comment()
     {
         $this->utility->loginAdmin();
-        $comment = Post::all()->random()->comments()->first();
+        $comment = Post::first()->comments()->first();
         $response = $this->getJson(route('api.comments.nested', $comment->id))
             ->assertOk()
             ->assertJsonCount($comment->comments()->count())
@@ -82,8 +82,8 @@ class FetchCommentsTest extends TestCase
     /** @test */
     public function it_allows_guests_to_fetch_comments()
     {
-        $this->utility->loginGuest();
-        $post = Post::all()->random();
+        $this->utility->loginUser();
+        $post = Post::first();
         $response = $this->getJson(route('api.comments.root', $post->id))
             ->assertOk()
             ->assertJsonCount($post->comments()->count())

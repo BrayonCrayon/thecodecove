@@ -18,7 +18,7 @@ class StoreCommentController extends Controller
      */
     public function __invoke(StoreCommentRequest $request)
     {
-        $comment = Comment::create($request->all());
+        $comment = Comment::create($request->validated());
         $comment->load(['user']);
         return response()->json($comment);
     }

@@ -19,7 +19,7 @@ class CreateCommentTest extends TestCase
     /** @test */
     public function it_does_allow_non_auth_user_to_create_a_comment()
     {
-        $post = Post::all()->random();
+        $post = Post::first();
         $commentText = $this->faker->text . '_TEST';
         $this->postJson(route('api.comment.store'), [
             'post_id' => $post->id,
@@ -37,7 +37,7 @@ class CreateCommentTest extends TestCase
     public function it_allows_auth_user_to_create_a_comment()
     {
         $this->utility->loginAdmin();
-        $post = Post::all()->random();
+        $post = Post::first();
         $commentText = $this->faker->text;
 
         $this->postJson(route('api.comment.store'), [
@@ -57,8 +57,8 @@ class CreateCommentTest extends TestCase
     /** @test */
     public function it_allows_users_to_reply_to_other_comments()
     {
-        $this->utility->loginGuest();
-        $post = Post::all()->random();
+        $this->utility->loginUser();
+        $post = Post::first();
         $comment = $post->comments()->first();
         $commentText = $this->faker->text;
 

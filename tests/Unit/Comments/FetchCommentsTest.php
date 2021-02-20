@@ -27,7 +27,7 @@ class FetchCommentsTest extends TestCase
     public function it_brings_back_all_root_post_comments()
     {
         $this->utility->loginAdmin();
-        $post = Post::all()->random();
+        $post = Post::first();
 
         $response = $this->getJson(route('api.comments.root', $post->id))
             ->assertOk();
@@ -58,7 +58,7 @@ class FetchCommentsTest extends TestCase
     public function it_brings_back_nested_post_comments()
     {
         $this->utility->loginAdmin();
-        $post = Post::all()->random();
+        $post = Post::first();
         $comment = $post->comments()->first();
 
         $response = $this->getJson(route('api.comments.nested', $comment->id))
