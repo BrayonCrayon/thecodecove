@@ -23,6 +23,7 @@ class PostResource extends JsonResource
             'status_id' => $this->resource->status_id,
             'published_at' => $this->resource->published_at ? Carbon::parse($this->resource->published_at)->toIso8601String() : null,
             'created_at' => $this->resource->created_at,
+            'comments' => CommentResource::collection($this->resource->comments),
         ];
     }
 }

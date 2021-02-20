@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Posts;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Status;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -79,6 +80,27 @@ class ViewPostTest extends TestCase
                 'status_id' => $post->status_id,
                 'published_at' => null,
                 'created_at' => $post->created_at,
+            ]);
+    }
+
+    /** @test */
+    public function it_returns_related_comments_for_post()
+    {
+        $post = factory(Post::class)->create([
+            'status_id' => Status::DRAFT,
+            'published_at' => null,
+        ]);
+        $comment = factory(Comment::class)->create([
+            'parent_id' => null,
+            'post_id' => $post->id,
+        ]);
+        $this->getJson(route('api.posts.view', $post->id))
+            ->assertOk()
+            ->assertJsonFragment([
+                'text' => $comment->text,
+                'post_id' => $comment->post_id,
+                'user_id' => $comment->user_id,
+                'parent_id' => $comment->parent_id,
             ]);
     }
 }
