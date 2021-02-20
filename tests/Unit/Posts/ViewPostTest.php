@@ -28,13 +28,13 @@ class ViewPostTest extends TestCase
     {
         $post = Post::all()->first();
         $post->load('comments');
-        $data = $this->getJson(route('api.posts.view', [
+        $this->getJson(route('api.posts.view', [
             'post' => $post->id,
         ]))
             ->assertOk()
-            ->getOriginalContent();
-
-        $this->assertEquals($data, $post, "Requested Post does not equal post in database");
+            ->assertJsonFragment([
+                'id' => $post->id,
+            ]);
     }
 
     /** @test */
