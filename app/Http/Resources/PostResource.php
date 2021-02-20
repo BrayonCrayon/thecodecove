@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 
 class PostResource extends JsonResource
 {
@@ -20,7 +21,7 @@ class PostResource extends JsonResource
             'content' => $this->resource->content,
             'user_id' => $this->resource->user_id,
             'status_id' => $this->resource->status_id,
-            'published_at' => $this->resource->published_at,
+            'published_at' => $this->resource->published_at ? Carbon::parse($this->resource->published_at)->toIso8601String() : null,
             'created_at' => $this->resource->created_at,
         ];
     }

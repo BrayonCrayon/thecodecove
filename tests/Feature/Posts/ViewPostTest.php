@@ -3,8 +3,10 @@
 namespace Tests\Feature\Posts;
 
 use App\Models\Post;
+use App\Models\Status;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Tests\Utility;
 
@@ -25,33 +27,58 @@ class ViewPostTest extends TestCase
     /** @test */
     public function it_allows_users_to_access_post()
     {
-        $post = Post::first();
+        $post = factory(Post::class)->create();
         $this->actingAs($this->utility->user)
             ->getJson(route('api.posts.view', $post->id))
-            ->assertOk()
-            ->assertJsonStructure([
-                'name',
-                'content',
-                'user_id',
-                'status_id',
-                'published_at',
-                'created_at',
-            ]);
+            ->assertOk();
     }
 
     /** @test */
     public function it_allows_non_users_to_access_post()
     {
-        $post = Post::first();
+        $post = factory(Post::class)->create();
+        $this->getJson(route('api.posts.view', $post->id))
+            ->assertOk();
+    }
+
+    /** @test */
+    public function it_returns_published_post_in_expected_shape()
+    {
+        Carbon::setTestNow(now());
+        $post = factory(Post::class)->create([
+            'status_id' => Status::PUBLISHED,
+            'published_at' => now(),
+        ]);
+        $this->getJson(route('api.posts.view', $post->id))
+        ->assertOk()
+        ->assertJsonFragment([
+            'id' => $post->id,
+            'name' => $post->name,
+            'content' => $post->content,
+            'user_id' => $post->user_id,
+            'status_id' => $post->status_id,
+            'published_at' => $post->published_at->toIso8601String(),
+            'created_at' => $post->created_at,
+        ]);
+    }
+
+    /** @test */
+    public function it_returns_drafted_post_in_expected_shape()
+    {
+        $post = factory(Post::class)->create([
+            'status_id' => Status::DRAFT,
+            'published_at' => null,
+        ]);
         $this->getJson(route('api.posts.view', $post->id))
             ->assertOk()
-            ->assertJsonStructure([
-                'name',
-                'content',
-                'user_id',
-                'status_id',
-                'published_at',
-                'created_at',
+            ->assertJsonFragment([
+                'id' => $post->id,
+                'name' => $post->name,
+                'content' => $post->content,
+                'user_id' => $post->user_id,
+                'status_id' => $post->status_id,
+                'published_at' => null,
+                'created_at' => $post->created_at,
             ]);
     }
 }
