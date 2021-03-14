@@ -2,22 +2,15 @@
 
 namespace App\Http\Controllers\Post;
 
-use App\Helpers\UserHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\UpdatePostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 
 class UpdatePostsController extends Controller
 {
-    private $userHelper;
-
-    public function __construct(UserHelper $userHelper)
-    {
-        $this->userHelper = $userHelper;
-    }
-
     /**
      * Handle the incoming request.
      *
@@ -29,6 +22,6 @@ class UpdatePostsController extends Controller
     {
         Gate::authorize('is-admin');
         $post->update($request->validated());
-        return response()->json($post);
+        return response()->json(PostResource::make($post));
     }
 }

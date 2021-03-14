@@ -5,21 +5,18 @@ namespace Tests\Unit\Posts;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Status;
-use App\Models\User;
 use Tests\TestCase;
-use Tests\Utility;
 
 class PostRelationshipTest extends TestCase
 {
-    private $utility;
-
     /** @test */
     public function it_brings_back_correct_user_from_posts_user_relationship()
     {
-        $post = Post::first();
-        $queriedUser = User::findOrFail($post->user_id);
-
-        $this->assertEquals($queriedUser, $post->user, "Post user relationship did not bring back correct user object");
+        $user = $this->loginUser();
+        $post = factory(Post::class)->create([
+            'user_id' => $user,
+        ]);
+        $this->assertEquals($user->id, $post->user->id);
         $this->assertDatabaseHas('users', [
             'id'    => $post->user->id,
             'name'  => $post->user->name,
@@ -30,10 +27,8 @@ class PostRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_correct_status_from_posts_status_relationship()
     {
-        $post = Post::first();
-        $queriedStatus = Status::findOrFail($post->status_id);
-
-        $this->assertEquals($queriedStatus, $post->status, "Post status relationship did not bring back correct status object");
+        $post = factory(Post::class)->create();
+        $this->assertEquals(Status::PUBLISHED, $post->status->id);
         $this->assertDatabaseHas('statuses', [
             'id'   => $post->status->id,
             'name' => $post->status->name,
@@ -43,11 +38,14 @@ class PostRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_correct_comments_from_posts_comment_relationship()
     {
-        $post = Post::first();
+        $post = factory(Post::class)->create();
+        factory(Comment::class, 2)->create([
+            'post_id' => $post->id,
+        ]);
         $queriedComments = Comment::isRootComment()->postIs($post->id)->get();
 
         $queriedComments->each(function ($item) use ($post) {
-            $this->assertEquals($item, $post->comments->where('id', $item->id)->first(), "Post did not bring back correct comment from the comment relationship");
+            $this->assertEquals($item, $post->comments->where('id', $item->id)->first());
         });
 
         $post->comments->each(function ($item) {
@@ -59,12 +57,5 @@ class PostRelationshipTest extends TestCase
                 'text'      => $item->text,
             ]);
         });
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->utility = new Utility($this);
-        $this->utility->testSetup();
     }
 }

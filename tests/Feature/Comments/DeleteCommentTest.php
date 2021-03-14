@@ -2,51 +2,69 @@
 
 namespace Tests\Feature\Comments;
 
+use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use Tests\Utility;
 
 class DeleteCommentTest extends TestCase
 {
-    use WithFaker;
-    use DatabaseTransactions;
-
-    private $utility;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->utility = new Utility($this);
-        $this->utility->testSetup();
-    }
-
     /** @test */
-    public function it_does_not_allow_non_logged_in_users_to_remove_comment()
+    public function it_does_not_allow_non_auth_to_remove_comment()
     {
-        $comment = Post::first()->comments()->first();
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+        $this->assertDatabaseHas('comments', [
+            'id' => $comment->id,
+            'post_id' => $comment->post_id,
+            'parent_id' => $comment->parent_id,
+            'user_id' => $comment->user_id,
+            'text' => $comment->text,
+        ]);
     }
 
     /** @test */
-    public function it_does_allow_guest_to_remove_comments()
+    public function it_does_allow_auth_user_to_remove_comments()
     {
-        $this->utility->loginUser();
-        $comment = Post::first()->comments()->first();
+        $this->loginUser();
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
+
+        $this->assertSoftDeleted('comments', [
+            'id' => $comment->id,
+            'post_id' => $comment->post_id,
+            'parent_id' => $comment->parent_id,
+            'user_id' => $comment->user_id,
+            'text' => $comment->text,
+        ]);
     }
 
     /** @test */
     public function it_does_allow_admin_user_to_remove_comments()
     {
-        $this->utility->loginAdmin();
-        $comment = Post::first()->comments()->first();
+        $this->loginAdmin();
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
+
+        $this->assertSoftDeleted('comments', [
+            'id' => $comment->id,
+            'post_id' => $comment->post_id,
+            'parent_id' => $comment->parent_id,
+            'user_id' => $comment->user_id,
+            'text' => $comment->text,
+        ]);
     }
 }

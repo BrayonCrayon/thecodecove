@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Post;
 
-use App\Helpers\UserHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
@@ -11,12 +10,6 @@ use Illuminate\Support\Facades\Gate;
 
 class DeletePostsController extends Controller
 {
-    private $userHelper;
-
-    public function __construct(UserHelper $userHelper)
-    {
-        $this->userHelper = $userHelper;
-    }
 
     /**
      * Handle the incoming request.

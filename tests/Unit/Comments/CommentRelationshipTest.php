@@ -6,19 +6,19 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Tests\TestCase;
-use Tests\Utility;
 
 class CommentRelationshipTest extends TestCase
 {
-    private $utility;
-
     /** @test */
-    public function it_brings_back_user_that_created_the_comment()
+    public function comment_belongs_to_a_user()
     {
-        $comment = Comment::first();
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
         $user = User::findOrFail($comment->user_id);
 
-        $this->assertEquals($user, $comment->user, "Comment user relationship did not bring back correct user object");
+        $this->assertEquals($user, $comment->user);
         $this->assertDatabaseHas('users', [
             'id'    => $comment->user->id,
             'name'  => $comment->user->name,
@@ -27,12 +27,15 @@ class CommentRelationshipTest extends TestCase
     }
 
     /** @test */
-    public function it_brings_back_post_that_the_comment_is_attached_to()
+    public function root_comment_belongs_to_post()
     {
-        $comment = Comment::isRootComment()->first();
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
         $post = Post::findOrFail($comment->post_id);
 
-        $this->assertEquals($post, $comment->post, "Comment post relationship did not bring back correct post object");
+        $this->assertEquals($post, $comment->post);
         $this->assertDatabaseHas('posts', [
             'id'        => $comment->post->id,
             'content'   => $comment->post->content,
@@ -42,31 +45,20 @@ class CommentRelationshipTest extends TestCase
     }
 
     /** @test */
-    public function it_brings_back_comments_that_are_replied_to_a_comment()
+    public function comment_can_have_many_comments()
     {
-        $comment = Comment::isRootComment()->get()->first();
-        $relationshipComments = Comment::isNestedComment()->parentIs($comment->id)->get();
+        $post = factory(Post::class)->create();
+        $parentComment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
+        $createdNestedComment = factory(Comment::class)->create([
+           'parent_id' => $parentComment->id,
+           'post_id' => null,
+        ]);
 
-        $relationshipComments->each(function ($item) use ($comment) {
-            $this->assertEquals($item, $comment->comments->where('id', $item->id)->first());
-        });
-
-        $comment->comments->each(function ($item) {
-            $this->assertDatabaseHas('comments', [
-                'id'        => $item->id,
-                'text'      => $item->text,
-                'user_id'   => $item->user_id,
-                'parent_id' => $item->parent_id,
-                'post_id'   => $item->post_id,
-            ]);
-        });
-    }
-
-    // Make this the first function in this class
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->utility = new Utility($this);
-        $this->utility->testSetup();
+        $childComment = $parentComment->comments()->first();
+        $this->assertEquals($createdNestedComment->id, $childComment->id);
+        $this->assertEquals($createdNestedComment->post_id, $childComment->post_id);
+        $this->assertEquals($createdNestedComment->parent_id, $childComment->parent_id);
     }
 }
