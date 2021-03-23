@@ -8,12 +8,12 @@ use App\Models\User;
 use Faker\Generator as Faker;
 
 $factory->define(Comment::class, function (Faker $faker) {
-    $isRootComment = $faker->randomElement([1, 0]) > 0;
     return [
         'text' => $faker->text,
-        // Factory a comment here and dont run queries in the factories unless absolutely necessary as it can get very slow
-        'post_id' => $isRootComment || Comment::all()->count() === 0 ? Post::all()->random()->id : null,
-        'user_id' => User::all()->first()->id,
-        'parent_id' => !$isRootComment && Comment::all()->count() > 0 ? Comment::all()->random()->id : null,
+        'post_id' => function() { return factory(Post::class)->create()->id; },
+        'user_id' => factory(User::class)->create()->id,
+        'parent_id' => null,
+        'created_at' => now(),
+        'updated_at' => now(),
     ];
 });

@@ -2,63 +2,68 @@
 
 namespace Tests\Feature\Comments;
 
+use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use Tests\Utility;
 
 class UpdateCommentTest extends TestCase
 {
-    use WithFaker;
-    use DatabaseTransactions;
-
-    private $utility;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->utility = new Utility($this);
-        $this->utility->testSetup();
-    }
+    const ALTERED_TEXT = "this is an altered text";
 
     /** @test */
-    public function it_does_not_allow_non_logged_in_users_to_update_comment()
+    public function it_does_not_allow_non_auth_users_to_update_comment()
     {
-        $comment = Post::first()->comments()->first();
-        $newCommentText = $this->faker->text;
-
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
         $this->putJson(route('api.comment.update', $comment->id), [
-            'text' => $newCommentText
+            'text' => self::ALTERED_TEXT
         ])
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+        $this->assertDatabaseHas('comments', [
+            'id' => $comment->id,
+            'text' => $comment->text,
+        ]);
     }
 
     /** @test */
-    public function it_does_allow_guests_to_update_comments()
+    public function it_does_allow_auth_users_to_update_comments()
     {
-        $this->utility->loginUser();
-        $comment = Post::first()->comments()->first();
-        $newCommentText = $this->faker->text;
-
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
+        $this->loginUser();
         $this->putJson(route('api.comment.update', $comment->id), [
-            'text' => $newCommentText
+            'text' => self::ALTERED_TEXT
         ])
             ->assertOk();
+
+        $this->assertDatabaseHas('comments', [
+            'id' => $comment->id,
+            'text' => self::ALTERED_TEXT
+        ]);
     }
 
     /** @test */
-    public function it_does_allow_admin_to_update_comments()
+    public function it_does_allow_admin_users_to_update_comments()
     {
-        $this->utility->loginAdmin();
-        $comment = Post::first()->comments()->first();
-        $newCommentText = $this->faker->text;
-
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+        ]);
+        $this->loginAdmin();
         $this->putJson(route('api.comment.update', $comment->id), [
-            'text' => $newCommentText
+            'text' => self::ALTERED_TEXT
         ])
             ->assertOk();
+
+        $this->assertDatabaseHas('comments', [
+            'id' => $comment->id,
+            'text' => self::ALTERED_TEXT
+        ]);
     }
 }

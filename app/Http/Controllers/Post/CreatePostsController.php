@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Helpers\UserHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\Status;
 use Illuminate\Http\JsonResponse;
@@ -39,6 +40,6 @@ class CreatePostsController extends Controller
             'user_id' => $request->get('userId')
         ]);
 
-        return response()->json($post);
+        return response()->json(PostResource::make($post));
     }
 }

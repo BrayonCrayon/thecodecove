@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\StoreCommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,6 +21,6 @@ class StoreCommentController extends Controller
     {
         $comment = Comment::create($request->validated());
         $comment->load(['user']);
-        return response()->json($comment);
+        return response()->json(CommentResource::make($comment));
     }
 }

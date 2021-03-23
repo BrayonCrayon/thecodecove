@@ -17,9 +17,4 @@ class UserHelper
         return self::getAuthUserTokens()->contains("admin");
     }
 
-    public function isAuthUserGuest()
-    {
-        return self::getAuthUserTokens()->contains("guest");
-    }
-
 }

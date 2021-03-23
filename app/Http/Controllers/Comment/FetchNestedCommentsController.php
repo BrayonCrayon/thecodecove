@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,6 +19,6 @@ class FetchNestedCommentsController extends Controller
      */
     public function __invoke(Request $request, Comment $comment)
     {
-        return response()->json($comment->comments);
+        return response()->json(CommentResource::collection($comment->comments));
     }
 }

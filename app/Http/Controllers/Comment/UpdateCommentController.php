@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\UpdateCommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
 
@@ -19,6 +20,6 @@ class UpdateCommentController extends Controller
     public function __invoke(UpdateCommentRequest $request, Comment $comment)
     {
         $comment->update($request->validated());
-        return response()->json($comment);
+        return response()->json(CommentResource::make($comment));
     }
 }

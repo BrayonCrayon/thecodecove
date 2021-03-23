@@ -11,14 +11,6 @@ class Post extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
-    protected $fillable = [
-        'name',
-        'content',
-        'user_id',
-        'status_id',
-        'published_at',
-        'created_at',
-    ];
     protected $with = [
         'user',
         'status',
@@ -48,7 +40,7 @@ class Post extends Model
      * @return HasMany
      */
     public function comments() {
-        return $this->hasMany(Comment::class)->orderByDesc('created_at');
+        return $this->hasMany(Comment::class)->orderByDesc('id');
     }
 
 

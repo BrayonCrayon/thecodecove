@@ -13,20 +13,27 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
+        $comments = collect();
         // Create Root comments
-        Post::all()->each(function($post) {
-           factory(Comment::class, 4)->create([
+        Post::all()->each(function($post) use ($comments) {
+           $comments->push(factory(Comment::class, 10)->make([
                'post_id' => $post->id,
                'parent_id' => null,
-           ]);
+           ]));
         });
 
+        Comment::insert($comments->flatten()->toArray());
+        $comments = Comment::all();
+
         // Create Nested Comments
-        Comment::all()->each(function ($comment) {
-            factory(Comment::class, 2)->create([
+        $nestedComments = collect();
+        $comments->each(function ($comment) use ($nestedComments) {
+            $nestedComments->push(factory(Comment::class, 2)->make([
                 'post_id' => null,
                 'parent_id' => $comment->id,
-            ]);
+            ]));
         });
+
+        Comment::insert($nestedComments->flatten()->toArray());
     }
 }

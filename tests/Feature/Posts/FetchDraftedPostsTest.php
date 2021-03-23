@@ -3,27 +3,11 @@
 namespace Tests\Feature\Posts;
 
 use App\Models\Post;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\Response;
-use Laravel\Sanctum\Sanctum;
+use App\Models\Status;
 use Tests\TestCase;
-use Tests\Utility;
 
 class FetchDraftedPostsTest extends TestCase
 {
-    use WithFaker;
-    use DatabaseTransactions;
-
-    private $utility;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->utility = new Utility($this);
-        $this->utility->testSetup();
-    }
-
     /** @test */
     public function it_does_not_allow_non_auth_users_to_get_drafted_posts()
     {
@@ -32,28 +16,60 @@ class FetchDraftedPostsTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_allow_guest_to_get_drafted_posts()
+    public function it_does_not_allow_auth_user_to_get_drafted_posts()
     {
-        $this->utility->loginUser();
+        $this->loginUser();
         $this->getJson(route('api.posts.drafted'))
             ->assertNotFound();
     }
 
     /** @test */
-    public function it_does_allow_auth_user_to_get_drafted_posts()
+    public function it_expects_certain_shape()
     {
-        $this->utility->loginAdmin();
+        factory(Post::class, 5)->create([
+            'status_id' => Status::DRAFT,
+            'published_at' => null
+        ]);
+        $this->loginAdmin();
+        $this->getJson(route('api.posts.drafted'))
+            ->assertJsonStructure([
+                'data' =>   [
+                    [
+                        'id',
+                        'name',
+                        'content',
+                        'status_id',
+                        'published_at',
+                    ]
+                ],
+                'links' => [
 
-        $posts = Post::drafted()->get();
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function it_does_allow_admin_user_to_get_drafted_posts()
+    {
+        $posts = factory(Post::class, 5)->create([
+            'status_id' => Status::DRAFT,
+            'published_at' => null
+        ]);
+        $this->loginAdmin();
         $response = $this->getJson(route('api.posts.drafted'))
             ->assertOk()
             ->assertJsonStructure([
-                [
-                    'id',
-                    'name',
-                    'content',
-                    'status_id',
-                    'published_at',
+                'data' =>   [
+                    [
+                        'id',
+                        'name',
+                        'content',
+                        'status_id',
+                        'published_at',
+                    ]
+                ],
+                'links' => [
+
                 ]
             ]);
 

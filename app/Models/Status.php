@@ -12,6 +12,29 @@ class Status extends Model
 
     const DRAFT = 1;
     const PUBLISHED = 2;
+    const STATUSES = [self::DRAFT, self::PUBLISHED];
+
+    /*
+     *********************************************************
+     *** Scope Queries
+     *********************************************************
+     */
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeDraft($query) {
+        return $query->where('id', self::DRAFT);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished($query) {
+        return $query->where('id', self::PUBLISHED);
+    }
 
     /*
      *********************************************************

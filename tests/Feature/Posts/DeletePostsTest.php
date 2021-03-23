@@ -12,42 +12,48 @@ use Tests\Utility;
 
 class DeletePostsTest extends TestCase
 {
-    use WithFaker;
-    use DatabaseTransactions;
-
-    private $utility;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->utility = new Utility($this);
-        $this->utility->testSetup();
-    }
-
     /** @test */
     public function it_does_not_allow_non_auth_users_to_delete_post()
     {
-        $post = Post::first();
+        $post = factory(Post::class)->create();
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertUnauthorized();
     }
 
     /** @test */
-    public function it_does_not_allow_guest_to_delete_post()
+    public function it_does_not_allow_a_user_to_delete_another_users_post()
     {
-        $this->utility->loginUser();
-        $post = Post::first();
+        $this->loginUser();
+        $post = factory(Post::class)->create();
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertNotFound();
+
+        $this->assertDatabaseHas('posts', [
+            'id' => $post->id,
+            'name' => $post->name,
+            'content' => $post->content,
+            'user_id' => $post->user_id,
+            'published_at' => $post->published_at,
+        ]);
     }
 
     /** @test */
-    public function it_does_allow_auth_users_to_delete_post()
+    public function it_does_allow_admin_users_to_delete_post()
     {
-        $this->utility->loginAdmin();
-        $post = Post::first();
+        $user = $this->loginAdmin();
+        $post = factory(Post::class)->create([
+            'user_id' => $user->id,
+        ]);
 
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertOK();
+
+        $this->assertSoftDeleted('posts', [
+            'id' => $post->id,
+            'name' => $post->name,
+            'content' => $post->content,
+            'user_id' => $post->user_id,
+            'published_at' => $post->published_at
+        ]);
     }
 }
