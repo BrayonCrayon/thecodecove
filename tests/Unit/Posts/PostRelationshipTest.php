@@ -13,7 +13,7 @@ class PostRelationshipTest extends TestCase
     public function it_brings_back_correct_user_from_posts_user_relationship()
     {
         $user = $this->loginUser();
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'user_id' => $user,
         ]);
         $this->assertEquals($user->id, $post->user->id);
@@ -27,7 +27,7 @@ class PostRelationshipTest extends TestCase
     /** @test */
     public function it_brings_back_correct_status_from_posts_status_relationship()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->assertEquals(Status::PUBLISHED, $post->status->id);
         $this->assertDatabaseHas('statuses', [
             'id'   => $post->status->id,
@@ -36,26 +36,11 @@ class PostRelationshipTest extends TestCase
     }
 
     /** @test */
-    public function it_brings_back_correct_comments_from_posts_comment_relationship()
+    public function it_has_many_comments()
     {
-        $post = factory(Post::class)->create();
-        factory(Comment::class, 2)->create([
-            'post_id' => $post->id,
-        ]);
-        $queriedComments = Comment::isRootComment()->postIs($post->id)->get();
-
-        $queriedComments->each(function ($item) use ($post) {
-            $this->assertEquals($item, $post->comments->where('id', $item->id)->first());
-        });
-
-        $post->comments->each(function ($item) {
-            $this->assertDatabaseHas('comments', [
-                'id'        => $item->id,
-                'user_id'   => $item->user_id,
-                'parent_id' => $item->parent_id,
-                'post_id'   => $item->post_id,
-                'text'      => $item->text,
-            ]);
-        });
+        $commentCount = 5;
+        $post = Post::factory()->hasComments($commentCount)->create();
+        $this->assertInstanceOf(Comment::class, $post->comments->first());
+        $this->assertEquals($commentCount, $post->comments->count());
     }
 }

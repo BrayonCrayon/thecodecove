@@ -2,8 +2,6 @@
 
 namespace Tests;
 
-use App\Models\Post;
-use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -18,7 +16,7 @@ abstract class TestCase extends BaseTestCase
 
     public function loginAdmin()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         Sanctum::actingAs(
             $user,
             ['admin']
@@ -29,16 +27,8 @@ abstract class TestCase extends BaseTestCase
 
     public function loginUser()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         Sanctum::actingAs($user);
         return $user;
-    }
-
-    public function CreateDraftedPosts($creationCount = 1)
-    {
-        factory(Post::class, 5)->create([
-            'status_id' => Status::DRAFT,
-            'published_at' => null
-        ]);
     }
 }

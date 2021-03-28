@@ -11,10 +11,11 @@ class FetchCommentsTest extends TestCase
     /** @test */
     public function it_returns_expected_shape()
     {
-        $post = factory(Post::class)->create();
-        $commentCount = factory(Comment::class, 5)->create([
+        $commentCount = 5;
+        $post = Post::factory()->create();
+        Comment::factory()->count($commentCount)->create([
             'post_id' => $post->id,
-        ])->count();
+        ]);
         $this->getJson(route('api.comments.root', $post->id))
             ->assertOk()
             ->assertJsonCount($commentCount)
@@ -32,8 +33,8 @@ class FetchCommentsTest extends TestCase
     /** @test */
     public function it_returns_correct_comments_from_post()
     {
-        $post = factory(Post::class)->create();
-        $comments = factory(Comment::class, 5)->create([
+        $post = Post::factory()->create();
+        $comments = Comment::factory()->count(5)->create([
             'post_id' => $post->id,
         ]);
         $response = $this->getJson(route('api.comments.root', $post->id))
@@ -53,7 +54,7 @@ class FetchCommentsTest extends TestCase
     /** @test */
     public function it_allows_non_auth_users_to_fetch_comments()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->getJson(route('api.comments.root', $post->id))
             ->assertOk();
     }
@@ -62,7 +63,7 @@ class FetchCommentsTest extends TestCase
     public function it_allows_auth_admins_to_fetch_comments()
     {
         $this->loginAdmin();
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->getJson(route('api.comments.root', $post->id))
             ->assertOk();
     }
@@ -71,7 +72,7 @@ class FetchCommentsTest extends TestCase
     public function it_allows_auth_users_to_fetch_comments()
     {
         $this->loginUser();
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->getJson(route('api.comments.root', $post->id))
             ->assertOk();
     }
@@ -79,11 +80,8 @@ class FetchCommentsTest extends TestCase
     /** @test */
     public function it_returns_correct_comments_of_a_comment()
     {
-        $post = factory(Post::class)->create();
-        $parentComment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
-        $nestedComment = factory(Comment::class)->create([
+        $parentComment = Comment::factory()->create();
+        $nestedComment = Comment::factory()->create([
             'post_id' => null,
             'parent_id' => $parentComment->id,
         ]);

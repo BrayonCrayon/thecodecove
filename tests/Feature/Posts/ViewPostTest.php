@@ -3,7 +3,6 @@
 namespace Tests\Feature\Posts;
 
 use App\Models\Post;
-use App\Models\Status;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -13,7 +12,7 @@ class ViewPostTest extends TestCase
     /** @test */
     public function it_allows_users_to_access_post()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->loginUser();
         $this->getJson(route('api.posts.view', $post->id))
             ->assertOk();
@@ -22,7 +21,7 @@ class ViewPostTest extends TestCase
     /** @test */
     public function it_allows_non_users_to_access_post()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->getJson(route('api.posts.view', $post->id))
             ->assertOk();
     }
@@ -30,7 +29,7 @@ class ViewPostTest extends TestCase
     /** @test */
     public function it_allows_admin_users_to_access_post()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->loginAdmin();
         $this->getJson(route('api.posts.view', $post->id))
             ->assertOk();
@@ -40,7 +39,7 @@ class ViewPostTest extends TestCase
     public function it_returns_published_post_in_expected_shape()
     {
         Carbon::setTestNow(now());
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->getJson(route('api.posts.view', $post->id))
         ->assertOk()
         ->assertJsonFragment([
@@ -58,10 +57,7 @@ class ViewPostTest extends TestCase
     /** @test */
     public function it_returns_drafted_post_in_expected_shape()
     {
-        $post = factory(Post::class)->create([
-            'status_id' => Status::DRAFT,
-            'published_at' => null,
-        ]);
+        $post = Post::factory()->drafted()->create();
         $this->getJson(route('api.posts.view', $post->id))
             ->assertOk()
             ->assertJsonFragment([
@@ -79,10 +75,7 @@ class ViewPostTest extends TestCase
     /** @test */
     public function it_returns_related_comments_for_post()
     {
-        $post = factory(Post::class)->create([
-            'status_id' => Status::DRAFT,
-            'published_at' => null,
-        ]);
+        $post = Post::factory()->drafted()->create();
         $response = $this->getJson(route('api.posts.view', $post->id))
             ->assertOk();
 

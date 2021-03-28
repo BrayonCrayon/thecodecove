@@ -13,13 +13,9 @@ class FetchPostsTest extends TestCase
     /** @test */
     public function it_returns_specific_shape()
     {
-        $posts = factory(Post::class, 5)->create();
-        $posts->each( function($post) {
-            factory(Comment::class, 2)->create([
-                'post_id' => $post->id,
-            ]);
-        });
+        Post::factory()->hasComments()->create();
         $this->getJson(route('api.posts'))
+            ->assertOk()
             ->assertJsonStructure([
                 'data' => [
                     [
@@ -63,28 +59,26 @@ class FetchPostsTest extends TestCase
     public function it_brings_back_only_published_posts()
     {
         Carbon::setTestNow();
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->getJson(route('api.posts'))
+            ->assertOk()
             ->assertJsonFragment([
                 'id'           => $post->id,
                 'name'         => $post->name,
                 'content'      => $post->content,
-                'published_at' => Carbon::parse($post->published_at)->toDateTimeString(),
+                'published_at' => Carbon::parse($post->published_at)->toIso8601String(),
                 'status_id'    => $post->status_id,
-                'created_at'   => $post->created_at,
-                'updated_at'   => $post->updated_at,
+                'created_at'   => Carbon::parse($post->created_at)->toIso8601String(),
+                'updated_at'   => Carbon::parse($post->updated_at)->toIso8601String(),
             ]);
     }
 
     /** @test */
     public function it_brings_back_all_comments_for_posts()
     {
-        $post = factory(Post::class)->create();
-        $comments = factory(Comment::class, 5)->create([
-            'post_id' => $post->id,
-        ]);
-
-        $response = $this->getJson(route('api.posts'));
+        $comments = Comment::factory()->count(5)->forPost()->create();
+        $response = $this->getJson(route('api.posts'))
+        ->assertOk();
 
         $comments->each(function ($item) use ($response) {
             $response->assertJsonFragment([

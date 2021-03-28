@@ -1,22 +1,34 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Status;
 use App\Models\User;
-use Faker\Generator as Faker;
-use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Post::class, function (Faker $faker) {
-    return [
-        'name'         => $faker->name,
-        'content'      => $faker->text,
-        'user_id'      => function () {
-            return factory(User::class)->create()->id;
-        },
-        'published_at' => Carbon::now()->subMonths($faker->randomDigit),
-        'status_id'    => Status::PUBLISHED,
-    ];
-});
+class PostFactory extends Factory
+{
+    protected $model = Post::class;
+
+    public function definition()
+    {
+        return [
+            'name'         => $this->faker->name,
+            'content'      => $this->faker->text,
+            'user_id'      => User::factory(),
+            'published_at' => now()->subMonths($this->faker->randomDigit),
+            'status_id'    => Status::PUBLISHED,
+        ];
+    }
+
+    public function drafted()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status_id'    => Status::DRAFT,
+                'published_at' => null
+            ];
+        });
+    }
+}

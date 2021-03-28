@@ -1,19 +1,25 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Comment::class, function (Faker $faker) {
-    return [
-        'text' => $faker->text,
-        'post_id' => function() { return factory(Post::class)->create()->id; },
-        'user_id' => factory(User::class)->create()->id,
-        'parent_id' => null,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ];
-});
+class CommentFactory extends Factory
+{
+    protected $model = Comment::class;
+
+    public function definition()
+    {
+        return [
+            'text' => $this->faker->text,
+            'post_id' => Post::factory(),
+            'user_id' => User::factory(),
+            'parent_id' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+    }
+}

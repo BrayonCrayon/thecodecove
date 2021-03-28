@@ -19,7 +19,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_auth_users()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $this->faker->name,
             'content' => $this->faker->text,
@@ -31,7 +31,7 @@ class UpdatePostsTest extends TestCase
     public function it_does_not_allow_non_admin_to_update_post()
     {
         $this->loginUser();
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $this->faker->name,
             'content' => $this->faker->text,
@@ -43,7 +43,7 @@ class UpdatePostsTest extends TestCase
     public function it_does_allow_admin_to_update_post()
     {
         $user = $this->loginAdmin();
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'user_id' => $user->id,
         ]);
         $post->name = $this->faker->name . self::ALTERED_STRING;
@@ -71,7 +71,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_undefined_parameters()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->loginAdmin();
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => null,
@@ -91,7 +91,7 @@ class UpdatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_empty_parameters()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $name = $this->faker->name . self::ALTERED_STRING;
         $content = $this->faker->text . self::ALTERED_STRING;
         $status = $post->status_id === Status::DRAFT;

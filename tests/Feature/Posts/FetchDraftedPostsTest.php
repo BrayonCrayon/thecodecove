@@ -26,10 +26,7 @@ class FetchDraftedPostsTest extends TestCase
     /** @test */
     public function it_expects_certain_shape()
     {
-        factory(Post::class, 5)->create([
-            'status_id' => Status::DRAFT,
-            'published_at' => null
-        ]);
+        Post::factory()->count(5)->drafted()->create();
         $this->loginAdmin();
         $this->getJson(route('api.posts.drafted'))
             ->assertJsonStructure([
@@ -51,10 +48,7 @@ class FetchDraftedPostsTest extends TestCase
     /** @test */
     public function it_does_allow_admin_user_to_get_drafted_posts()
     {
-        $posts = factory(Post::class, 5)->create([
-            'status_id' => Status::DRAFT,
-            'published_at' => null
-        ]);
+        $posts = Post::factory()->count(5)->drafted()->create();
         $this->loginAdmin();
         $response = $this->getJson(route('api.posts.drafted'))
             ->assertOk()
