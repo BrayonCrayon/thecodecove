@@ -9,22 +9,13 @@ use Tests\TestCase;
 class StatusesTest extends TestCase
 {
     /** @test */
-    public function published_status_has_many_published_posts()
+    public function it_has_many_posts()
     {
-        $createdCount = factory(Post::class, 5)->create()->count();
-        $publishedPostCount = Status::published()->first()->posts()->count();
-        $this->assertEquals($createdCount, $publishedPostCount);
-    }
-
-    /** @test */
-    public function drafted_status_has_many_drafted_posts()
-    {
-        $createdCount = factory(Post::class, 5)->create([
-            'status_id' => Status::DRAFT,
-            'published_at' => null,
-        ])->count();
-        $draftedPostCount = Status::draft()->first()->posts()->count();
-        $this->assertEquals($createdCount, $draftedPostCount);
+        $expectedCount = 5;
+        Post::factory()->count($expectedCount)->create();
+        $status = Status::findOrFail(Status::PUBLISHED);
+        $this->assertInstanceOf(Post::class, $status->posts->first());
+        $this->assertEquals($expectedCount, $status->posts->count());
     }
 
 }

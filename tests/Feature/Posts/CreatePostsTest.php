@@ -3,13 +3,8 @@
 namespace Tests\Feature\Posts;
 
 use App\Models\Status;
-use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use Tests\Utility;
 
 class CreatePostsTest extends TestCase
 {
@@ -100,7 +95,7 @@ class CreatePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_existing_user()
     {
-        $user = $this->loginAdmin();
+        $this->loginAdmin();
         $name = $this->faker->name;
         $content = $this->faker->text;
         $nonExistingUserId = 0;

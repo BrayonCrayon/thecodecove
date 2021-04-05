@@ -14,10 +14,7 @@ class UpdateCommentTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_auth_users_to_update_comment()
     {
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
+        $comment = Comment::factory()->create();
         $this->putJson(route('api.comment.update', $comment->id), [
             'text' => self::ALTERED_TEXT
         ])
@@ -32,10 +29,7 @@ class UpdateCommentTest extends TestCase
     /** @test */
     public function it_does_allow_auth_users_to_update_comments()
     {
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
+        $comment = Comment::factory()->create();
         $this->loginUser();
         $this->putJson(route('api.comment.update', $comment->id), [
             'text' => self::ALTERED_TEXT
@@ -51,10 +45,7 @@ class UpdateCommentTest extends TestCase
     /** @test */
     public function it_does_allow_admin_users_to_update_comments()
     {
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
+        $comment = Comment::factory()->create();
         $this->loginAdmin();
         $this->putJson(route('api.comment.update', $comment->id), [
             'text' => self::ALTERED_TEXT

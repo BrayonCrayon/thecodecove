@@ -15,7 +15,7 @@ class DeletePostsTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_auth_users_to_delete_post()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertUnauthorized();
     }
@@ -24,7 +24,7 @@ class DeletePostsTest extends TestCase
     public function it_does_not_allow_a_user_to_delete_another_users_post()
     {
         $this->loginUser();
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->deleteJson(route('api.posts.delete', $post->id))
             ->assertNotFound();
 
@@ -41,7 +41,7 @@ class DeletePostsTest extends TestCase
     public function it_does_allow_admin_users_to_delete_post()
     {
         $user = $this->loginAdmin();
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'user_id' => $user->id,
         ]);
 

@@ -12,10 +12,7 @@ class DeleteCommentTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_auth_to_remove_comment()
     {
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
+        $comment = Comment::factory()->create();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertStatus(Response::HTTP_UNAUTHORIZED);
 
@@ -32,10 +29,7 @@ class DeleteCommentTest extends TestCase
     public function it_does_allow_auth_user_to_remove_comments()
     {
         $this->loginUser();
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
+        $comment = Comment::factory()->create();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
 
@@ -52,10 +46,7 @@ class DeleteCommentTest extends TestCase
     public function it_does_allow_admin_user_to_remove_comments()
     {
         $this->loginAdmin();
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
+        $comment = Comment::factory()->create();
         $this->deleteJson(route('api.comment.delete', $comment->id))
             ->assertOk();
 

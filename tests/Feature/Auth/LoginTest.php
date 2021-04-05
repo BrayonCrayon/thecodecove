@@ -11,7 +11,7 @@ class LoginTest extends TestCase
     /** @test */
     public function it_allows_user_to_login()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->postJson(route('login'), [
             'email'    => $user->email,
             'password' => 'password',

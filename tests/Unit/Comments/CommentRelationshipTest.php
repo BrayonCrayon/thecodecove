@@ -12,10 +12,7 @@ class CommentRelationshipTest extends TestCase
     /** @test */
     public function comment_belongs_to_a_user()
     {
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
+        $comment = Comment::factory()->create();
         $user = User::findOrFail($comment->user_id);
 
         $this->assertEquals($user, $comment->user);
@@ -29,36 +26,16 @@ class CommentRelationshipTest extends TestCase
     /** @test */
     public function root_comment_belongs_to_post()
     {
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
-        $post = Post::findOrFail($comment->post_id);
-
-        $this->assertEquals($post, $comment->post);
-        $this->assertDatabaseHas('posts', [
-            'id'        => $comment->post->id,
-            'content'   => $comment->post->content,
-            'user_id'   => $comment->post->user_id,
-            'status_id' => $comment->post->status_id,
-        ]);
+        $comment = Comment::factory()->create();
+        $this->assertInstanceOf(Post::class, $comment->post);
     }
 
     /** @test */
     public function comment_can_have_many_comments()
     {
-        $post = factory(Post::class)->create();
-        $parentComment = factory(Comment::class)->create([
-            'post_id' => $post->id,
-        ]);
-        $createdNestedComment = factory(Comment::class)->create([
-           'parent_id' => $parentComment->id,
+        $parentComment = Comment::factory()->hasComments(1, [
            'post_id' => null,
-        ]);
-
-        $childComment = $parentComment->comments()->first();
-        $this->assertEquals($createdNestedComment->id, $childComment->id);
-        $this->assertEquals($createdNestedComment->post_id, $childComment->post_id);
-        $this->assertEquals($createdNestedComment->parent_id, $childComment->parent_id);
+        ])->create();
+        $this->assertInstanceOf(Comment::class, $parentComment->comments()->first());
     }
 }

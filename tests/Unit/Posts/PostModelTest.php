@@ -12,7 +12,7 @@ class PostModelTest extends TestCase
     /** @test */
     public function it_resets_published_at_when_post_is_updated_to_draft()
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->loginAdmin();
         $this->putJson(route('api.posts.update', $post->id), [
             'name' => $post->name,
@@ -33,10 +33,7 @@ class PostModelTest extends TestCase
     public function it_sets_published_at_when_post_is_updated_to_published()
     {
         $this->loginAdmin();
-        $post = factory(Post::class)->create([
-            'status_id' => Status::DRAFT,
-            'published_at' => null,
-        ]);
+        $post = Post::factory()->drafted()->create();
 
         Carbon::setTestNow();
         $this->putJson(route('api.posts.update', $post->id), [

@@ -11,7 +11,7 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_does_not_allow_non_auth_users()
     {
-        $newUser = Factory(User::class)->make();
+        $newUser = User::factory()->make();
 
         $this->postJson(route('register'), [
             'email' => $newUser->email,
@@ -26,7 +26,7 @@ class RegisterTest extends TestCase
     public function it_allows_auth_user_to_register_new_users()
     {
         $user = $this->loginAdmin();
-        $newUser = Factory(User::class)->make();
+        $newUser = User::factory()->make();
 
         $this->postJson(route('register'), [
             'email' => $newUser->email,
